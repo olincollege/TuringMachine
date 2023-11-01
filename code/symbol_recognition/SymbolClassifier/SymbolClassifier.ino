@@ -1,4 +1,7 @@
 #include "esp_camera.h"
+#include "model.h"
+
+#include "esp_camera.h"
 
 #define PWDN_GPIO_NUM     32
 #define RESET_GPIO_NUM    -1
@@ -26,7 +29,9 @@
 #define H (HEIGHT / BLOCK_SIZE)
 #define THRESHOLD 127
 
-int features[H*W] = { 0 };
+float features[H*W] = { 0 };
+
+Eloquent::ML::Port::RandomForest classifier;
 
 void setup() {
   Serial.begin(115200);
@@ -40,8 +45,6 @@ void loop() {
     delay(2000);
     return;
   }
-
-  print_features();
   delay(3000);
 }
 
@@ -79,7 +82,6 @@ bool setup_camera(framesize_t frameSize) {
 
     return ok;
 }
-
 bool capture_still() {
   camera_fb_t *frame = esp_camera_fb_get();
 
@@ -104,26 +106,13 @@ bool capture_still() {
     features[j] += frame->buf[i];
   }
 
-  //Apply threshold after computing features
-  //for (size_t i = 0; i < H * W; i++) {
-  //  features[i] = (features[i] / (BLOCK_SIZE * BLOCK_SIZE) > THRESHOLD) ? 1 : 0;
-  //}
-
-  // Print features
-  print_features();
+  classify();
 
   esp_camera_fb_return(frame); // Free frame buffer memory after processing
 
   return true;
 }
 
-void print_features() {
-  for (size_t i = 0; i < H * W; i++) {
-    Serial.print(features[i]);
-
-    if (i != H * W - 1)
-      Serial.print(',');
-  }
-
-  Serial.println();
+void classify() {
+  Serial.println(classifier.predictLabel(features));
 }
