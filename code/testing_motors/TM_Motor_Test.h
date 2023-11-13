@@ -13,13 +13,15 @@ class TM_Motor_Test
 {
   public:
     TM_Motor_Test(uint8_t dcm_speed);
+    void begin();
     void moveFilmForward();
     void moveFilmBackward();
   private:
-    Adafruit_MotorShield AFMS;
-    Adafruit_StepperMotor *fineFilmControl;
-    Adafruit_DCMotor *coarseFilmControl;
+    Adafruit_MotorShield AFMS = Adafruit_MotorShield();;
+    Adafruit_StepperMotor *fineFilmControl = AFMS.getStepper(200, 1);
+    Adafruit_DCMotor *coarseFilmControl = AFMS.getMotor(3);
     uint8_t dc_speed;
+
 };
 
 #endif
