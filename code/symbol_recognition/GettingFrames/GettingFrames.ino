@@ -18,30 +18,48 @@
 #define HREF_GPIO_NUM     23
 #define PCLK_GPIO_NUM     22
 
+// LED Illuminator
+#define CONFIG_LED_ILLUMINATOR_ENABLED
+#define CONFIG_LED_LEDC_PIN 4
+#define CONFIG_LED_MAX_INTENSITY 255
+#define CONFIG_LED_LEDC_TIMER LEDC_TIMER_0
+#define CONFIG_LED_LEDC_CHANNEL LEDC_CHANNEL_0
+
+const int pwmfreq = 50000;     // 50K pwm frequency
+const int pwmresolution = 9;   // duty cycle bit range
+
 #define FRAME_SIZE FRAMESIZE_QQVGA
 #define WIDTH 160
 #define HEIGHT 120
-#define BLOCK_SIZE 5
+#define BLOCK_SIZE 3
 #define W (WIDTH / BLOCK_SIZE)
 #define H (HEIGHT / BLOCK_SIZE)
-#define THRESHOLD 127
+#define THRESHOLD 20
 
 int features[H*W] = { 0 };
 
 void setup() {
   Serial.begin(115200);
   delay(1000); // Allow time for serial monitor to open
+
+  // Configure LED PWM channel
+  //ledcSetup(CONFIG_LED_LEDC_CHANNEL, pwmfreq, pwmresolution);
+  //ledcAttachPin(CONFIG_LED_LEDC_PIN, CONFIG_LED_LEDC_CHANNEL);
+  
+  // Set LED brightness
+  //ledcWrite(CONFIG_LED_LEDC_CHANNEL, 100);
+
   Serial.println(setup_camera(FRAME_SIZE) ? "Camera Initialized" : "Camera Initialization Failed");
   delay(2000); // Allow time for the camera to stabilize before attempting capture
 }
 void loop() {
+
   if (!capture_still()) {
     Serial.println("Failed to capture");
     delay(2000);
     return;
   }
 
-  print_features();
   delay(3000);
 }
 
@@ -62,8 +80,8 @@ bool setup_camera(framesize_t frameSize) {
     config.pin_pclk = PCLK_GPIO_NUM;
     config.pin_vsync = VSYNC_GPIO_NUM;
     config.pin_href = HREF_GPIO_NUM;
-    config.pin_sscb_sda = SIOD_GPIO_NUM;
-    config.pin_sscb_scl = SIOC_GPIO_NUM;
+    config.pin_sccb_sda = SIOD_GPIO_NUM;
+    config.pin_sccb_scl = SIOC_GPIO_NUM;
     config.pin_pwdn = PWDN_GPIO_NUM;
     config.pin_reset = RESET_GPIO_NUM;
     config.xclk_freq_hz = 20000000;
@@ -75,7 +93,12 @@ bool setup_camera(framesize_t frameSize) {
     bool ok = esp_camera_init(&config) == ESP_OK;
 
     sensor_t *sensor = esp_camera_sensor_get();
+
     sensor->set_framesize(sensor, frameSize);
+    sensor->set_brightness(sensor, 2);
+    sensor->set_contrast(sensor, 2);
+    sensor->set_awb_gain(sensor, 1);
+    sensor->set_wb_mode(sensor, 0);
 
     return ok;
 }
@@ -104,13 +127,13 @@ bool capture_still() {
     features[j] += frame->buf[i];
   }
 
-  //Apply threshold after computing features
-  //for (size_t i = 0; i < H * W; i++) {
-  //  features[i] = (features[i] / (BLOCK_SIZE * BLOCK_SIZE) > THRESHOLD) ? 1 : 0;
-  //}
-
   // Print features
   print_features();
+
+  //Apply threshold after computing features
+  //for (size_t i = 0; i < H * W; i++) {
+  //  features[i] = (features[i] / (BLOCK_SIZE * BLOCK_SIZE) > THRESHOLD) ? 0 : 1;
+  //}
 
   esp_camera_fb_return(frame); // Free frame buffer memory after processing
 
