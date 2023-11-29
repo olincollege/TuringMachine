@@ -12,8 +12,9 @@ class TM_Motor_Movement
     TM_Motor_Movement(
     uint8_t film_dc_pin,
     uint8_t stepper_pin,
-    uint8_t solenoid_pin,
     uint8_t eraser_pin,
+    uint8_t eraser_min,
+    uint8_t eraser_max,
     uint8_t stepper_total_steps,
     uint8_t stepper_move_steps,
     uint8_t stepper_speed,
@@ -34,8 +35,6 @@ class TM_Motor_Movement
     void erase();
     void headPositiveVerticalLine();
     void headNegativeVerticalLine();
-    void drawForwardHorizontalLine();
-    void drawBackwardHorizontalLine();
     void drawArrow();
     void drawZero();
     void drawOne();
@@ -55,8 +54,9 @@ class TM_Motor_Movement
     // Will be M1, M2, M3, or M4
     uint8_t film_dcM_pin;
     uint8_t stepperM_pin;
-    uint8_t solenoidM_pin;
     uint8_t eraserM_pin;
+    uint8_t eraserM_min;
+    uint8_t eraserM_max;
     uint8_t stepperM_total_steps;
     uint8_t stepperM_move_steps;
     uint8_t stepperM_speed;
