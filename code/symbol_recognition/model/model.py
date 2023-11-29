@@ -21,10 +21,11 @@ X_train, X_test, y_train, y_test = train_test_split(
 )
 
 # Classifier
-# classifier = svm.SVC(kernel="linear", gamma=0.001)
-# classifier = RandomForestClassifier(n_estimators=100)
 classifier = RandomForestClassifier(
-    n_estimators=1500, max_depth=20, min_samples_split=2, min_samples_leaf=1
+    n_estimators=1500,
+    max_depth=20,
+    min_samples_split=4,
+    min_samples_leaf=2
 )
 classifier.fit(X_train, y_train)
 
