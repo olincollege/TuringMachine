@@ -17,15 +17,15 @@ y = data.iloc[:, 0]  # Labels
 
 # Split data into training and testing sets
 X_train, X_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.2, random_state=42
+    X, y, test_size=0.1, random_state=42
 )
 
 # Classifier
 classifier = RandomForestClassifier(
-    n_estimators=1500,
+    n_estimators=1000,
     max_depth=20,
-    min_samples_split=4,
-    min_samples_leaf=2
+    min_samples_split=2,
+    min_samples_leaf=1
 )
 classifier.fit(X_train, y_train)
 
@@ -34,8 +34,8 @@ accuracy = classifier.score(X_test, y_test)
 print(f"Classifier Accuracy: {accuracy*100}%")
 
 # Convert the trained classifier to C code
-# classmap = {0: "0", 1: "1", 2: "_", 3: ">", 4: "#", 5: "X", 6: "Y"}
-classmap = {0: "0", 1: "1", 2: "_"}
+classmap = {0: "0", 1: "1", 2: "_", 3: ">", 4: "#", 5: "X", 6: "Y"}
+#classmap = {0: "0", 1: "1", 2: "_"}
 c_code = port(classifier, classmap=classmap)
 
 # Save the C code to a file
