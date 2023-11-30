@@ -95,7 +95,7 @@ bool setup_camera(framesize_t frameSize) {
     sensor_t *sensor = esp_camera_sensor_get();
 
     sensor->set_framesize(sensor, frameSize);
-    sensor->set_brightness(sensor, 0);
+    sensor->set_brightness(sensor, 2);
     sensor->set_contrast(sensor, 2);
     sensor->set_awb_gain(sensor, 1);
     sensor->set_wb_mode(sensor, 0);

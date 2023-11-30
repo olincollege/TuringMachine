@@ -31,7 +31,7 @@ const int pwmresolution = 9;   // duty cycle bit range
 #define FRAME_SIZE FRAMESIZE_QQVGA
 #define WIDTH 160
 #define HEIGHT 120
-#define THRESHOLD 25
+#define THRESHOLD 127
 
 float features[HEIGHT*WIDTH] = { 0 };
 
@@ -40,11 +40,11 @@ void setup() {
   delay(1000); // Allow time for serial monitor to open
 
   // Configure LED PWM channel
-  ledcSetup(CONFIG_LED_LEDC_CHANNEL, pwmfreq, pwmresolution);
-  ledcAttachPin(CONFIG_LED_LEDC_PIN, CONFIG_LED_LEDC_CHANNEL);
+  //ledcSetup(CONFIG_LED_LEDC_CHANNEL, pwmfreq, pwmresolution);
+  //ledcAttachPin(CONFIG_LED_LEDC_PIN, CONFIG_LED_LEDC_CHANNEL);
   
   // Set LED brightness
-  ledcWrite(CONFIG_LED_LEDC_CHANNEL, 100);
+  //ledcWrite(CONFIG_LED_LEDC_CHANNEL, 100);
   
   Serial.println(setup_camera(FRAME_SIZE) ? "Camera Initialized" : "Camera Initialization Failed");
   delay(2000); // Allow time for the camera to stabilize before attempting capture
@@ -88,7 +88,12 @@ bool setup_camera(framesize_t frameSize) {
     bool ok = esp_camera_init(&config) == ESP_OK;
 
     sensor_t *sensor = esp_camera_sensor_get();
+
     sensor->set_framesize(sensor, frameSize);
+    sensor->set_brightness(sensor, 2);
+    sensor->set_contrast(sensor, 2);
+    sensor->set_awb_gain(sensor, 1);
+    sensor->set_wb_mode(sensor, 0);
 
     return ok;
 }
@@ -125,33 +130,14 @@ bool capture_still() {
   Serial.println(total_features);
 
   // Classify symbols using conditionals
-  if (total_features < 430) {
-    Serial.println("#");
-  }
-  else if (total_features >= 430 && total_features <= 490) {
+  if (total_features < 5200) {
     Serial.println("1");
   }
-  else if (total_features >=491  && total_features <= 500) {
-    Serial.println("_");
-  }
-  else if (total_features >= 500 && total_features <= 575) {
-    Serial.println("0");
-  }
-  else if (total_features >= 576 && total_features <= 650) {
-    Serial.println(">");
-  }
-  //else if (total_features >= 693 && total_features <= 697) {
-  //  Serial.println("Y");
-  //}
-  else if (total_features >= 651 && total_features <= 900) {
-    Serial.println("X");
-  }
   else {
-    Serial.println("classification error");
+    Serial.println("0");
   }
 
   esp_camera_fb_return(frame); // Free frame buffer memory after processing
 
   return true;
 }
-
