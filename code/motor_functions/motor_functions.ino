@@ -84,4 +84,7 @@ void loop() {
   delay(2000);
   TM.goHome();
   delay(2000);
+  TM.moveOneBitBackward();
+  delay(2000);
+  TM.moveOneSymbolBackward();
 }
