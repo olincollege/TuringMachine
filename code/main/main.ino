@@ -1,18 +1,26 @@
 /*
+======================================================================================
+
 Main script for the Turing Machine
 
 Learn more at: https://olincollege.github.io/pie-2023-03/turing-machine/
 
-All rights reserved by Sparsh Gupta, Mark Belanger, Noah Rand, Will Young, Joe Leedy.
-Developed at Olin College of Engineering, 2023.
+Developed by Sparsh Gupta, Mark Belanger, Noah Rand, Will Young, and Joe Leedy
+at Olin College of Engineering, 2023.
 
 ======================================================================================
 
-List of operations currently implemented:
+List of operations currently supported:
 
-- Check whether a string is of certain format:
-  - anbn (equal number of 0s and 1s in the string)
+- anbn (check whether a string has an equal number of 0s and 1s)
 
+======================================================================================
+
+Sample string input formats for operations:
+
+anbn: 00, 1010, 0100, etc. (any string of even length that consists of 0s and 1s)
+
+======================================================================================
 */
 
 // Imports
