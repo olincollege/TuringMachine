@@ -13,7 +13,13 @@ It could be modified easily to support more Turing-computable operations and Tur
 Learn more at: https://olincollege.github.io/pie-2023-03/turing-machine/
 
 ### Operations
-List of operations currently implemented:
+List of operations currently supported:
 
-- Check whether a string is of certain format: 
-  - anbn (equal number of 0s and 1s in the string)
+- **anbn** (check whether a string has an equal number of 0s and 1s)
+
+### Strings
+
+Sample string input formats for operations:
+
+**anbn**: 00, 1010, 0100, etc. (any string of even length that consists of 0s and 1s)
+
