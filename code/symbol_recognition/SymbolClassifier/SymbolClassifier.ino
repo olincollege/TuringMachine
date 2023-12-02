@@ -1,7 +1,4 @@
 #include "esp_camera.h"
-#include "model.h"
-
-#include "esp_camera.h"
 
 #define PWDN_GPIO_NUM     32
 #define RESET_GPIO_NUM    -1
@@ -32,28 +29,23 @@ const int pwmfreq = 50000;     // 50K pwm frequency
 const int pwmresolution = 9;   // duty cycle bit range
 
 #define FRAME_SIZE FRAMESIZE_QQVGA
-#define WIDTH 78
+#define WIDTH 160
 #define HEIGHT 120
-#define BLOCK_SIZE 2
-#define W (WIDTH / BLOCK_SIZE)
-#define H (HEIGHT / BLOCK_SIZE)
 #define THRESHOLD 127
 
-float features[H*W] = { 0 };
-
-Eloquent::ML::Port::RandomForest classifier;
+float features[HEIGHT*WIDTH] = { 0 };
 
 void setup() {
   Serial.begin(115200);
   delay(1000); // Allow time for serial monitor to open
 
-  // // Configure LED PWM channel
-  // ledcSetup(CONFIG_LED_LEDC_CHANNEL, pwmfreq, pwmresolution);
-  // ledcAttachPin(CONFIG_LED_LEDC_PIN, CONFIG_LED_LEDC_CHANNEL);
+  // Configure LED PWM channel
+  //ledcSetup(CONFIG_LED_LEDC_CHANNEL, pwmfreq, pwmresolution);
+  //ledcAttachPin(CONFIG_LED_LEDC_PIN, CONFIG_LED_LEDC_CHANNEL);
   
-  // // Set LED brightness
-  // ledcWrite(CONFIG_LED_LEDC_CHANNEL, 100);
-
+  // Set LED brightness
+  //ledcWrite(CONFIG_LED_LEDC_CHANNEL, 100);
+  
   Serial.println(setup_camera(FRAME_SIZE) ? "Camera Initialized" : "Camera Initialization Failed");
   delay(2000); // Allow time for the camera to stabilize before attempting capture
 }
@@ -114,35 +106,38 @@ bool capture_still() {
   }
 
   // Reset all the features
-  for (size_t i = 0; i < H * W; i++)
+  for (size_t i = 0; i < HEIGHT * WIDTH; i++)
     features[i] = 0;
 
-  // For each pixel within the specified range, compute the position in the downsampled image
+  // For each pixel, compute the position in the downsampled image
   for (size_t i = 0; i < frame->len; i++) {
     const uint16_t x = i % WIDTH;
     const uint16_t y = i / WIDTH;
+    const uint16_t j = y * WIDTH + x;
 
-    // Check if the pixel is within the desired range
-    if (x >= 52 && x <= 130) {
-      const uint8_t block_x = (x - 52) / BLOCK_SIZE; // Adjust x to start from 0
-      const uint8_t block_y = y / BLOCK_SIZE;
-      const uint16_t j = block_y * (W - 52/BLOCK_SIZE) + block_x;
-
-      // Compute features by averaging pixel values
-      features[j] += frame->buf[i];
-    }
+    // Compute features by averaging pixel values
+    features[j] += frame->buf[i];
   }
 
+  int total_features = 0;
   //Apply threshold after computing features
-  for (size_t i = 0; i < H * W; i++) {
-   features[i] = (features[i] / (BLOCK_SIZE * BLOCK_SIZE) > THRESHOLD) ? 0 : 1;
+  for (size_t i = 0; i < HEIGHT * WIDTH; i++) {
+    features[i] = (features[i] > THRESHOLD) ? 0 : 1;
+
+    total_features += features[i];
   }
 
-  // Classify symbols using model
-  Serial.println(classifier.predictLabel(features));
+  Serial.println(total_features);
+
+  // Classify symbols using conditionals
+  if (total_features < 5200) {
+    Serial.println("1");
+  }
+  else {
+    Serial.println("0");
+  }
 
   esp_camera_fb_return(frame); // Free frame buffer memory after processing
 
   return true;
 }
-
