@@ -47,7 +47,6 @@ class TM_Motor_Movement
     void headNegativeVerticalLine();
     void drawBitZero();
     void drawBitOne();
-    void drawArrow();
     void drawZero();
     void drawOne();
     void drawX();
@@ -57,6 +56,8 @@ class TM_Motor_Movement
     void moveOneSymbolForward();
     void eraseOneSymbol();
     void moveOneBitForward();
+    void moveOneBitBackward();
+    void moveOneSymbolBackward();
     void moveToErase();
     void eraseBackward();
     void eraserToWrite();
