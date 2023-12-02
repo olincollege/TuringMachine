@@ -10,12 +10,14 @@ class TM_Motor_Movement
 {
   public:
     TM_Motor_Movement(
+    String bitstring,
     uint8_t film_dc_pin,
     uint8_t stepper_pin,
     uint8_t eraser_actuation_pin,
     uint8_t eraser_control_pin,
     uint8_t eraser_actuation_min,
     uint8_t eraser_actuation_max,
+    uint8_t eraser_speed,
     uint8_t stepper_total_steps,
     uint8_t stepper_move_steps,
     uint8_t stepper_speed,
@@ -27,9 +29,11 @@ class TM_Motor_Movement
     uint8_t head_min_pos,
     uint8_t head_max_pos,
     uint8_t zero_lines,
-    uint8_t symbol_space,
-    uint8_t eraser_speed,
-
+    uint8_t bit_space,
+    uint8_t eraser_head_distance,
+    uint8_t eraser_distance,
+    uint8_t eraser_to_draw,
+    uint8_t eraser_to_write_dist
     );
     void begin();
     void moveFilmForward();
@@ -41,6 +45,8 @@ class TM_Motor_Movement
     void erase();
     void headPositiveVerticalLine();
     void headNegativeVerticalLine();
+    void drawBitZero();
+    void drawBitOne();
     void drawArrow();
     void drawZero();
     void drawOne();
@@ -48,8 +54,16 @@ class TM_Motor_Movement
     void drawY();
     void drawBlank();
     void drawHash();
-    void moveOneSymbolForawrd();
+    void moveOneSymbolForward();
     void eraseOneSymbol();
+    void moveOneBitForward();
+    void moveToErase();
+    void eraseBackward();
+    void eraserToWrite();
+    void drawAll();
+    void goHome();
+    
+
   private:
     Adafruit_MotorShield AFMS;
     Adafruit_StepperMotor *fineFilmControl;
@@ -58,6 +72,7 @@ class TM_Motor_Movement
     Servo drawingControl;
     Servo eraserActuation;
     Adafruit_DCMotor *eraserControl;
+    String start_bitstring;
     uint8_t film_dcM_pin;
     uint8_t stepperM_pin;
     uint8_t eraser_actuationM_pin;
@@ -75,8 +90,12 @@ class TM_Motor_Movement
     uint8_t head_min;
     uint8_t head_max;
     uint8_t zero_lines_num;
-    uint8_t symbol_spacing;
+    uint8_t bit_spacing;
     uint8_t eraserM_speed;
+    uint8_t eraserM_to_write_dist;
+    uint8_t eraserM_head_distance;
+    uint8_t eraserM_distance;
+
 };
 
 #endif
