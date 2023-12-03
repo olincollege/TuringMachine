@@ -3,6 +3,7 @@
 #include "string.h"
 
 // Instantiate TM Class
+String bitstring ="0110";
 uint8_t film_dc_pin = 3;
 uint8_t stepper_pin = 1;
 uint8_t eraser_actuation_pin = 8;
@@ -61,55 +62,40 @@ String symbol_bits;
 char symbol;
 
 char readSymbol() {
-  // Read first bit and move one symbol forward
-  first_bit = Serial.read();
-  TM.moveOneBitForward();
+    // Read first bit and move one symbol forward
+    first_bit = Serial.read();
+    TM.moveOneBitForward();
 
-  delay(2000);
+    delay(2000);
 
-  // Read second bit and move one symbol forward
-  second_bit = Serial.read();
-  TM.moveOneBitForward();
+    // Read second bit and move one symbol forward
+    second_bit = Serial.read();
+    TM.moveOneBitForward();
 
-  delay(2000);
+    delay(2000);
 
-  // Read third bit and move one symbol forward
-  third_bit = Serial.read();
+    // Read third bit and move one symbol forward
+    third_bit = Serial.read();
 
-  // create symbol bitstring
-  symbol_bits = first_bit + second_bit + third_bit;
+    // create symbol bitstring
+    symbol_bits = first_bit + second_bit + third_bit;
 
-  // Map to symbol
-  switch (symbol_bits) {
+    // Map to symbol
+    if (strcmp(symbol_bits.c_str(), "000") == 0) {
+        symbol = '#';
+    } else if (strcmp(symbol_bits.c_str(), "010") == 0) {
+        symbol = '0';
+    } else if (strcmp(symbol_bits.c_str(), "011") == 0) {
+        symbol = '1';
+    } else if (strcmp(symbol_bits.c_str(), "101") == 0) {
+        symbol = 'X';
+    } else if (strcmp(symbol_bits.c_str(), "110") == 0) {
+        symbol = 'Y';
+    } else if (strcmp(symbol_bits.c_str(), "111") == 0) {
+        symbol = '_';
+    } else {
+        symbol = 'E';
+    }
 
-    case "000":
-      symbol = "#";
-      break;
-
-    case "010":
-      symbol = "0";
-      break;
-
-    case "011":
-      symbol = "1";
-      break;
-
-    case "101":
-      symbol = "X";
-      break;
-
-    case "110":
-      symbol = "Y";
-      break;
-
-    case "111":
-      symbol = "_";
-      break;
-    
-    default:  // in case error happens in reading
-      symbol = "E";
-      break;
-  }
-
-  return symbol;
+    return symbol;
 }

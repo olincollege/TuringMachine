@@ -1,5 +1,5 @@
-#ifndef palindrome_h
-#define palindrome_h
+#ifndef TRANSITION_STRUCT_TYPE_H
+#define TRANSITION_STRUCT_TYPE_H
 
 // Define types for state transition
 struct TM_transition_input {
@@ -12,6 +12,4 @@ struct TM_transition_output {
     short int move_pointer;
 };
 
-TM_transition_output palindrome(const TM_transition_input& input);
-
-#endif
+#endif //TRANSITION_STRUCT_TYPE_H

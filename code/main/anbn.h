@@ -1,17 +1,8 @@
-#ifndef anbn_h
-#define anbn_h
+#ifndef ANBN_H
+#define ANBN_H
 
-// Define types for state transition
-struct TM_transition_input {
-    unsigned short int state;
-    char symbol;
-};
-struct TM_transition_output {
-    unsigned short int state;
-    char symbol;
-    short int move_pointer;
-};
+#include "transition_struct_type.h"
 
 TM_transition_output anbn(const TM_transition_input& input);
 
-#endif
+#endif //ANBN_H
