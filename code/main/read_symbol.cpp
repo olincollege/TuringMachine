@@ -1,5 +1,5 @@
 #include "read_symbol.h"
-#include "motor_functions/TM_Motor_Movement.h"
+#include "TM_Motor_Movement.h"
 #include "string.h"
 
 // Instantiate TM Class

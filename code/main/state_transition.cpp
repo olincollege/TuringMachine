@@ -1,6 +1,6 @@
 #include "state_transition.h"
-#include "read_symbol/read_symbol.h"
-#include "motor_functions/TM_Motor_Movement.h"
+#include "read_symbol.h"
+#include "TM_Motor_Movement.h"
 #include "string.h"
 #include "anbn.h"
 #include "palindrome.h"

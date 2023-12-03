@@ -13,33 +13,37 @@ at Olin College of Engineering, 2023.
 List of operations currently supported:
 
 - anbn (check whether a string has an equal number of 0s and 1s)
-
+- palindrome (check whether a string of 0s and 1s is a palindrome)
 ======================================================================================
 
 Sample string input formats for operations:
 
-anbn: 00, 1010, 0100, etc. (any string of even length that consists of 0s and 1s)
+anbn: 00, 1010, 0101, etc. (any string of even length that consists of 0s and 1s)
+palindrome: 010, 1001, 111, etc. (any string that consists of 0s and 1s)
 
 ======================================================================================
 */
 
 // Imports
 #include "Arduino.h"
-#include "state_transition/state_transition.h"
-#include "motor_functions/TM_Motor_Movement.h"
-#include <string>
-using namespace std;
+#include "state_transition.h"
+#include "TM_Motor_Movement.h"
+#include "string.h"
 
 //------------------------------------------------------------------------------//
 //------------------------------------------------------------------------------//
 // Provide the input operation and input string to perform on the Turing Machine
-string operation = "";
-string inputString = "";
+String operation = "";
+String inputString = "";
 //------------------------------------------------------------------------------//
 //------------------------------------------------------------------------------//
 
 
+
+
+/*==============================================================================*/
 // Instantiate TM Class
+String bitstring = "000";
 uint8_t film_dc_pin = 3;
 uint8_t stepper_pin = 1;
 uint8_t eraser_actuation_pin = 8;
