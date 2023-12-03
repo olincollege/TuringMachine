@@ -1,4 +1,6 @@
+#include <Arduino.h>
 #include "state_transition.h"
+#include "transition_struct_type.h"
 #include "read_symbol.h"
 #include "TM_Motor_Movement.h"
 #include "string.h"
@@ -6,14 +8,15 @@
 #include "palindrome.h"
 
 // Instantiate TM Class
+String bitstring ="0110";
 uint8_t film_dc_pin = 3;
 uint8_t stepper_pin = 1;
-uint8_t eraser_actuation_pin = 8;
+uint8_t eraser_actuation_pin = 8;                     // Placeholder
 uint8_t eraser_control_pin = 3;
 uint8_t eraser_actuation_min = 90;
 uint8_t eraser_actuation_max = 180;
-uint8_t eraser_min = 90;
-uint8_t eraser_max = 180;
+uint8_t eraser_min = 90;                     // Placeholder
+uint8_t eraser_max = 180;                     // Placeholder
 uint8_t eraser_speed = 255;
 uint8_t stepper_total_steps = 200;
 uint8_t stepper_move_steps = 20;
@@ -59,32 +62,20 @@ TM_Motor_Movement TM(
         eraser_to_write_dist
 );
 
+char stateTransition_anbn();
+char stateTransition_palindrome();
+char stateTransition(const String& operation);
 
 // Function to choose which draw function to use for symbol
 void drawSymbol(char symbol_to_draw) {
-    switch (symbol_to_draw) {
-        case "X":
-            TM.drawX();
-            break;
-        case "Y":
-            TM.drawY();
-            break;
-        case "_":
-            TM.drawBlank();
-            break;
+    if (symbol_to_draw == 'X') {
+        TM.drawX();
+    } else if (symbol_to_draw == 'Y') {
+        TM.drawY();
+    } else if (symbol_to_draw == '_') {
+        TM.drawBlank();
     }
 }
-
-// Define types for state transition
-struct TM_transition_input {
-    unsigned short int state;
-    char symbol;
-};
-struct TM_transition_output {
-    unsigned short int state;
-    char symbol;
-    unsigned short int move_pointer;
-};
 
 // anbn state transition
 char stateTransition_anbn() {
@@ -103,9 +94,9 @@ char stateTransition_anbn() {
 
         // Halting state: Accept or Reject
         if (anbn_output.state == 77) {
-            return "A";
+            return 'A';
         } else if (anbn_output.state == 66) {
-            return "R";
+            return 'R';
         }
 
         // Write new symbol or skip drawing if same symbol
@@ -157,9 +148,9 @@ char stateTransition_palindrome() {
 
         // Halting state: Accept or Reject
         if (palindrome_output.state == 77) {
-            return "A";
+            return 'A';
         } else if (palindrome_output.state == 66) {
-            return "R";
+            return 'R';
         }
 
         // Write new symbol or skip drawing if same symbol
@@ -197,19 +188,16 @@ char stateTransition_palindrome() {
 char result; // To return the result of computation
 // Select stateTransition TM based on operation
 char stateTransition(const String& operation) {
-    switch (operation) {
-        case "anbn":
-            result = stateTransition_anbn();
-            return result;
-
-        case "palindrome":
-            result = stateTransition_palindrome();
-            return result;
-
-        // TODO - add other operations later
-
-        case default:
-            return "R";
+    if (operation == "anbn") {
+        result = stateTransition_anbn();
+        return result;
+    } else if (operation == "palindrome") {
+        result = stateTransition_palindrome();
+        return result;
+    }
+    // TODO - add other operations later
+    else {
+        return 'R';
     }
 }
 

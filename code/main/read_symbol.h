@@ -1,6 +1,6 @@
-#ifndef read_symbol_h
-#define read_symbol_h
+#ifndef READ_SYMBOL_H
+#define READ_SYMBOL_H
 
 char readSymbol();
 
-#endif
+#endif //READ_SYMBOL_H

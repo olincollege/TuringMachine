@@ -1,8 +1,9 @@
-#ifndef state_transition_h
-#define state_transition_h
+#ifndef STATE_TRANSITION_H
+#define STATE_TRANSITION_H
 
 #include "string.h"
+#include "transition_struct_type.h"
 
 char stateTransition(const String& operation);
 
-#endif
+#endif //STATE_TRANSITION_H

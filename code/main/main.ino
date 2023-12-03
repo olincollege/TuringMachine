@@ -43,7 +43,7 @@ String inputString = "";
 
 /*==============================================================================*/
 // Instantiate TM Class
-String bitstring = "000";
+String bitstring = inputString;
 uint8_t film_dc_pin = 3;
 uint8_t stepper_pin = 1;
 uint8_t eraser_actuation_pin = 8;

@@ -8,32 +8,32 @@
 
 class TM_Motor_Movement
 {
-  public:
+public:
     TM_Motor_Movement(
-    String bitstring,
-    uint8_t film_dc_pin,
-    uint8_t stepper_pin,
-    uint8_t eraser_actuation_pin,
-    uint8_t eraser_control_pin,
-    uint8_t eraser_actuation_min,
-    uint8_t eraser_actuation_max,
-    uint8_t eraser_speed,
-    uint8_t stepper_total_steps,
-    uint8_t stepper_move_steps,
-    uint8_t stepper_speed,
-    uint8_t dc_film_speed,
-    uint8_t draw_actuation_servo_pin,
-    uint8_t draw_control_servo_pin,
-    uint8_t marker_up_pos,
-    uint8_t marker_down_pos,
-    uint8_t head_min_pos,
-    uint8_t head_max_pos,
-    uint8_t zero_lines,
-    uint8_t bit_space,
-    uint8_t eraser_head_distance,
-    uint8_t eraser_distance,
-    uint8_t eraser_to_draw,
-    uint8_t eraser_to_write_dist
+            String bitstring,
+            uint8_t film_dc_pin,
+            uint8_t stepper_pin,
+            uint8_t eraser_actuation_pin,
+            uint8_t eraser_control_pin,
+            uint8_t eraser_actuation_min,
+            uint8_t eraser_actuation_max,
+            uint8_t eraser_speed,
+            uint8_t stepper_total_steps,
+            uint8_t stepper_move_steps,
+            uint8_t stepper_speed,
+            uint8_t dc_film_speed,
+            uint8_t draw_actuation_servo_pin,
+            uint8_t draw_control_servo_pin,
+            uint8_t marker_up_pos,
+            uint8_t marker_down_pos,
+            uint8_t head_min_pos,
+            uint8_t head_max_pos,
+            uint8_t zero_lines,
+            uint8_t bit_space,
+            uint8_t eraser_head_distance,
+            uint8_t eraser_distance,
+            uint8_t eraser_to_draw,
+            uint8_t eraser_to_write_dist
     );
     void begin();
     void moveFilmForward();
@@ -47,7 +47,6 @@ class TM_Motor_Movement
     void headNegativeVerticalLine();
     void drawBitZero();
     void drawBitOne();
-    void drawArrow();
     void drawZero();
     void drawOne();
     void drawX();
@@ -57,14 +56,16 @@ class TM_Motor_Movement
     void moveOneSymbolForward();
     void eraseOneSymbol();
     void moveOneBitForward();
+    void moveOneBitBackward();
+    void moveOneSymbolBackward();
     void moveToErase();
     void eraseBackward();
     void eraserToWrite();
     void drawAll();
     void goHome();
-    
 
-  private:
+
+private:
     Adafruit_MotorShield AFMS;
     Adafruit_StepperMotor *fineFilmControl;
     Adafruit_DCMotor *coarseFilmControl;
