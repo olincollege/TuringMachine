@@ -16,10 +16,13 @@ Learn more at: https://olincollege.github.io/pie-2023-03/turing-machine/
 List of operations currently supported:
 
 - **anbn** (check whether a string has an equal number of 0s and 1s)
+- **palindrome** (check whether a string of 0s and 1s is a palindrome)
 
 ### Strings
 
 Sample string input formats for operations:
 
 **anbn**: 00, 1010, 0100, etc. (any string of even length that consists of 0s and 1s)
+
+**palindrome**: 010, 1001, 111, etc. (any string that consists of 0s and 1s)
 
