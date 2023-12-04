@@ -123,7 +123,23 @@ TM_Motor_Movement::TM_Motor_Movement(
     delay(50);
   }
 
+  void TM_Motor_Movement::moveOneBitBackward() {
+    fineFilmControl->setSpeed(stepperM_speed);
+    coarseFilmControl->setSpeed(dcM_film_speed);
+    coarseFilmControl->run(BACKWARD);
+    fineFilmControl->step(bit_spacing, BACKWARD, MICROSTEP);
+    coarseFilmControl->setSpeed(0);
+    delay(500);
+  }
 
+  void TM_Motor_Movement::moveOneSymbolBackward() {
+    moveOneBitBackward();
+    delay(50);
+    moveOneBitBackward();
+    delay(50);
+    moveOneBitBackward();
+    delay(50);
+  }
 
   void TM_Motor_Movement::eraserDown() {
     eraserActuation.write(eraser_actuationM_min);
@@ -135,39 +151,39 @@ TM_Motor_Movement::TM_Motor_Movement(
 
 
   void TM_Motor_Movement::moveToErase(){
-  fineFilmControl->setSpeed(stepperM_speed);
-  coarseFilmControl->setSpeed(dcM_film_speed);
-  coarseFilmControl->run(BACKWARD);
-  fineFilmControl->step(eraserM_head_distance, BACKWARD, MICROSTEP);
-  coarseFilmControl->setSpeed(0); 
-  delay(500);    
+    fineFilmControl->setSpeed(stepperM_speed);
+    coarseFilmControl->setSpeed(dcM_film_speed);
+    coarseFilmControl->run(BACKWARD);
+    fineFilmControl->step(eraserM_head_distance, BACKWARD, MICROSTEP);
+    coarseFilmControl->setSpeed(0); 
+    delay(500);    
   }
 
   void TM_Motor_Movement::eraseBackward() {
-  fineFilmControl->setSpeed(stepperM_speed);
-  coarseFilmControl->setSpeed(dcM_film_speed);
-  coarseFilmControl->run(BACKWARD);
-  fineFilmControl->step(eraserM_distance, BACKWARD, MICROSTEP);
-  coarseFilmControl->setSpeed(0);
+    fineFilmControl->setSpeed(stepperM_speed);
+    coarseFilmControl->setSpeed(dcM_film_speed);
+    coarseFilmControl->run(BACKWARD);
+    fineFilmControl->step(eraserM_distance, BACKWARD, MICROSTEP);
+    coarseFilmControl->setSpeed(0);
   }
   void TM_Motor_Movement::eraserToWrite() {
-  fineFilmControl->setSpeed(stepperM_speed);
-  coarseFilmControl->setSpeed(dcM_film_speed);
-  coarseFilmControl->run(FORWARD);
-  fineFilmControl->step(eraserM_to_write_dist, FORWARD, MICROSTEP);
-  coarseFilmControl->setSpeed(0);   
+    fineFilmControl->setSpeed(stepperM_speed);
+    coarseFilmControl->setSpeed(dcM_film_speed);
+    coarseFilmControl->run(FORWARD);
+    fineFilmControl->step(eraserM_to_write_dist, FORWARD, MICROSTEP);
+    coarseFilmControl->setSpeed(0);   
   }
 
 
   void TM_Motor_Movement::eraseOneSymbol() {
-  moveToErase();
-  eraserDown();
-  eraserControl->setSpeed(eraserM_speed);
-  eraseBackward();
-  eraserControl->setSpeed(0);
-  delay(500);
-  eraserUp();
-  eraserToWrite();
+    moveToErase();
+    eraserDown();
+    eraserControl->setSpeed(eraserM_speed);
+    eraseBackward();
+    eraserControl->setSpeed(0);
+    delay(500);
+    eraserUp();
+    eraserToWrite();
 } 
 
 
