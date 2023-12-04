@@ -148,7 +148,7 @@ TM_Motor_Movement::TM_Motor_Movement(
   void TM_Motor_Movement::eraserUp() {
     eraserActuation.write(eraser_actuationM_max);
   }
-
+back
 
   void TM_Motor_Movement::moveToErase(){
     fineFilmControl->setSpeed(stepperM_speed);
@@ -236,12 +236,12 @@ TM_Motor_Movement::TM_Motor_Movement(
   void TM_Motor_Movement::drawBitZero() {
     markerDown();
     for (int i = 0; i <= zero_lines_num; i++) {
-    headPositiveVerticalLine();
-    moveFilmForward();
-    headNegativeVerticalLine();
+      headPositiveVerticalLine();
+      moveFilmForward();
+      headNegativeVerticalLine();
     }
     for (int i = 0; i <= zero_lines_num; i++) {
-    moveFilmBackward();
+      moveFilmBackward();
     }
     markerUp();
   }

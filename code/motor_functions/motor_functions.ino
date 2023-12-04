@@ -57,34 +57,16 @@ TM_Motor_Movement TM(
 void setup() {
 //   // put your setup code here, to run once:
   TM.begin();
-  delay(2000);
+  // delay(2000);
+  // TM.markerDown();
+  // delay(2000);
+  // TM.markerUp();
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
-  TM.headPositiveVerticalLine();
   delay(2000);
-  TM.headNegativeVerticalLine();
+  TM.markerDown();
   delay(2000);
-  TM.drawOne();
-  delay(2000);
-  TM.drawZero();
-  delay(2000);
-  TM.drawBlank();
-  delay(2000);
-  TM.drawX();
-  delay(2000);
-  TM.drawY();
-  delay(2000);
-  TM.eraseOneSymbol();
-  delay(2000);
-  TM.moveOneSymbolForward();
-  delay(2000);
-  TM.drawAll();
-  delay(2000);
-  TM.goHome();
-  delay(2000);
-  TM.moveOneBitBackward();
-  delay(2000);
-  TM.moveOneSymbolBackward();
+  TM.markerUp();
 }
