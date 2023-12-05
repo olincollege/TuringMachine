@@ -1,0 +1,218 @@
+<!DOCTYPE HTML>
+<!--
+	Template credits:
+	Forty by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Electrical - Turing Machine</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+				<!-- Note: The "styleN" class below should match that of the banner element. -->
+					<header id="header" class="alt style2">
+						<a href="index.html" class="logo"><strong>Olin College - PIE</strong> <span>Turing Machine</span></a>
+						<nav>
+							<a href="#menu">Menu</a>
+						</nav>
+					</header>
+
+				<!-- Menu -->
+					<nav id="menu">
+						<ul class="links">
+							<li><a href="index.html">Home</a></li>
+							<li><a href="about.html">About</a></li>
+							<li><a href="demo.html">Demonstration</a></li>
+							<li><a href="mechanical.html">Mechanical</a></li>
+							<li><a href="electrical.html">Electrical</a></li>
+							<li><a href="software.html">Software</a></li>
+							<li><a href="bom.html">Bill of Materials</a></li>
+						</ul>
+					</nav>
+
+				<!-- Banner -->
+				<!-- Note: The "styleN" class below should match that of the header element. -->
+					<section id="banner" class="style2">
+						<div class="inner">
+							<span class="image">
+								<img src="images/pic07.jpg" alt="" />
+							</span>
+							<header class="major">
+								<h1>Electrical - Turing Machine</h1>
+							</header>
+							<div class="content">
+								<p></p>
+							</div>
+						</div>
+					</section>
+
+				<!-- Main -->
+					<div id="main">
+
+						<!-- One -->
+						<section id="one" class="spotlights">
+							<section>
+								<a href="" class="image">
+									<img src="images/Electrical_Block_Diagram.png" alt="" data-position="center center" style="width: 650px"/>
+								</a>
+								<div class="content">
+									<div class="inner">
+										<header class="major">
+											<h3>Electrical Diagram</h3>
+										</header>
+										<p>A high-level block diagram of the electrical system.</p>
+									</div>
+								</div>
+							</section>
+							<section>
+								<a href="" class="image">
+									<img src="images/arduino.jpg" alt="" data-position="top center" />
+								</a>
+								<div class="content">
+									<div class="inner">
+										<header class="major">
+											<h3>Microcontroller - Arduino UNO</h3>
+										</header>
+										<p>Controlling the motors is an important task for this machine, and it all happens
+											on an Arduino UNO. The entire framework and codebase for state transition and critical
+											operations on the Turing Machine are all executed using the Arduino. Arduino UNOs have a
+											wide range of motors drivers that are compatible and have great documentation and support.
+										</p>
+										<ul class="actions">
+											<li><a href="https://docs.arduino.cc/hardware/uno-rev3" class="button">Learn more about Arduino UNO</a></li>
+										</ul>
+									</div>
+								</div>
+							</section>
+							<section>
+								<a href="" class="image">
+									<img src="/images/" alt="" data-position="top center" />
+								</a>
+								<div class="content">
+									<div class="inner">
+										<header class="major">
+											<h3>Microcontroller - ESP32-Cam</h3>
+										</header>
+										<p>An ESP32-Cam has the computing power of an ESP32 but with a camera module.
+											This microcontroller is the heart of the symbol recognition system and is
+											powered by being plugged into a computer.</p>
+										<ul class="actions">
+											<li><a href="https://github.com/espressif/esp32-camera" class="button">Learn more about ESP32-Cam</a></li>
+										</ul>
+									</div>
+								</div>
+							</section>
+							<section>
+								<a href="" class="image">
+									<img src="/images/motorshield.jpg" alt="" data-position="top center" />
+								</a>
+								<div class="content">
+									<div class="inner">
+										<header class="major">
+											<h3>Motor Shield</h3>
+										</header>
+										<p>The AdaFruit Motor Shield v2 has the ability to control and power steppers,
+											DC motors and servos, and stacks on an Arduino UNO. Using the Motor Shield
+											prevents the need for several different driver boards and power management
+											for the motors.
+										</p>
+										<ul class="actions">
+											<li><a href="https://cdn-learn.adafruit.com/downloads/pdf/adafruit-motor-shield-v2-for-arduino.pdf" class="button">Learn more about the Motor Shield</a></li>
+										</ul>
+									</div>
+								</div>
+							</section>
+							<section>
+								<a href="" class="image">
+									<img src="/images/pic09.jpg" alt="" data-position="top center" />
+								</a>
+								<div class="content">
+									<div class="inner">
+										<header class="major">
+											<h3>Tape Actuation</h3>
+										</header>
+										<p>DC motors were used for the coarse control of the film movement.
+											These motors unwind the tape from the spools to provide some slack
+											for the fine control of the tape. These motors are controlled and
+											powered by an AdaFruit Motor Shield v2.
+										</p>
+										<p>A Nema 17 bipolar stepper motor controls the fine movement of the tape.
+											This stepper has 1.8 degree steps intervals and a total of 200 steps.
+											The machine takes advantage of the small step intervals to move the tape
+											small amounts for smoother writing.This motor is controlled and powered by
+											an AdaFruit Motor Shield v2.
+										</p>
+
+									</div>
+								</div>
+							</section>
+							<section>
+								<a href="generic.html" class="image">
+									<img src="images/pic09.jpg" alt="" data-position="top center" />
+								</a>
+								<div class="content">
+									<div class="inner">
+										<header class="major">
+											<h3>Write Head</h3>
+										</header>
+										<p></p>
+										<ul class="actions">
+											<li><a href="generic.html" class="button">Learn more</a></li>
+										</ul>
+									</div>
+								</div>
+							</section>
+							<section>
+								<a href="generic.html" class="image">
+									<img src="/images/pic09.jpg" alt="" data-position="top center" />
+								</a>
+								<div class="content">
+									<div class="inner">
+										<header class="major">
+											<h3>Erase Head</h3>
+										</header>
+										<p></p>
+										<ul class="actions">
+											<li><a href="generic.html" class="button">Learn more</a></li>
+										</ul>
+									</div>
+								</div>
+							</section>
+						</section>
+					</div>
+
+
+				<!-- Footer -->
+					<footer id="footer">
+						<div class="inner">
+							<ul class="icons">
+								<li><a href="https://github.com/olincollege/TuringMachine" class="icon brands alt fa-github"><span class="label">GitHub</span></a></li>		</ul>
+							<ul class="copyright">
+								<li>&copy; 2023-Present. All rights reserved by the <a href="index.html" class="link">People</a> who developed it. For queries, reach out to one of us, and we'd be happy to connect!</li>
+							</ul>
+						</div>
+					</footer>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>
