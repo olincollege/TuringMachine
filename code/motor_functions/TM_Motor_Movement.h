@@ -49,7 +49,6 @@ class TM_Motor_Movement
     uint8_t bit_space,
     uint8_t eraser_head_distance,
     uint8_t eraser_distance,
-    uint8_t eraser_to_draw,
     uint8_t eraser_to_write_dist
     );
     void begin();
@@ -75,6 +74,8 @@ class TM_Motor_Movement
     void moveOneBitForward();
     void moveOneBitBackward();
     void moveOneSymbolBackward();
+    void eraserOn();
+    void eraserOff();
     void moveToErase();
     void eraseBackward();
     void eraserToWrite();
