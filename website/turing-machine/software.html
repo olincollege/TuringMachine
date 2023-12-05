@@ -1,0 +1,156 @@
+<!DOCTYPE HTML>
+<!--
+	Template credits:
+	Forty by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Software - Turing Machine</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+				<!-- Note: The "styleN" class below should match that of the banner element. -->
+					<header id="header" class="alt style2">
+						<a href="index.html" class="logo"><strong>Olin College - PIE</strong> <span>Turing Machine</span></a>
+						<nav>
+							<a href="#menu">Menu</a>
+						</nav>
+					</header>
+
+				<!-- Menu -->
+					<nav id="menu">
+						<ul class="links">
+							<li><a href="index.html">Home</a></li>
+							<li><a href="about.html">About</a></li>
+							<li><a href="demo.html">Demonstration</a></li>
+							<li><a href="mechanical.html">Mechanical</a></li>
+							<li><a href="electrical.html">Electrical</a></li>
+							<li><a href="software.html">Software</a></li>
+							<li><a href="bom.html">Bill of Materials</a></li>
+						</ul>
+					</nav>
+
+				<!-- Banner -->
+				<!-- Note: The "styleN" class below should match that of the header element. -->
+					<section id="banner" class="style2">
+						<div class="inner">
+							<span class="image">
+								<img src="images/pic07.jpg" alt="" />
+							</span>
+							<header class="major">
+								<h1>Software - Turing Machine</h1>
+							</header>
+							<div class="content">
+							</div>
+						</div>
+					</section>
+
+				<!-- Main -->
+					<div id="main">
+
+						<!-- One -->
+							<section id="one" class="spotlights">
+								<section>
+									<a href="template/generic.html" class="image">
+										<img src="images/pic08.jpg" alt="" data-position="center center" />
+									</a>
+									<div class="content">
+										<div class="inner">
+											<header class="major">
+												<h3>Symbol Recognition</h3>
+											</header>
+											<p>The Symbol recognition is performed in two parts. First, an ESP32-Cam captures a
+											frame of the physical tape in real-time which is a single bit (0 or 1). We create bit-strings of 3 bits each, and these
+											bit-strings are mapped to the six symbols (our alphabet for the Turing Machine) we have for the Turing Machine to perform computation.</p>
+											<p>The mapping for the bit-strings to symbols is as follows:<br>
+												000 -> #<br>
+												010 -> 0<br>
+												011 -> 1<br>
+												101 -> X<br>
+												110 -> Y<br>
+												111 -> _<br>
+											</p>
+
+										</div>
+									</div>
+								</section>
+								<section>
+									<a href="" class="image">
+										<img src="/images/pic09.jpg" alt="" data-position="top center" />
+									</a>
+									<div class="content">
+										<div class="inner">
+											<header class="major">
+												<h3>Symbol Writing and Erasing</h3>
+											</header>
+											<p>The firmware to write/erase symbols is pretty straightforward as we have
+											functions to draw symbols, erase symbols, etc. which take use of more abstract functions like draw
+											a bit 0, etc. These functions work in sync to perform writing/erasing based on the
+											state transition rules for an operation while performing a computation on the Turing Machine.</p>
+										</div>
+									</div>
+								</section>
+								<section>
+									<a href="" class="image">
+										<img src="/images/pic09.jpg" alt="" data-position="top center" />
+									</a>
+									<div class="content">
+										<div class="inner">
+											<header class="major">
+												<h3>State Transition</h3>
+											</header>
+											<p>The state transition is performed based on which operation needs to be performed on the Turing Machine.
+											As our model is based on the idea of a Universal Turing Machine, it is capable of performing multiple operations on the same machine
+											and has different sets of rules (or instructions/transitions) to perform these computations. </p>
+											<p>In a Turing Machine, we track the current state and the current symbol, and then based on the operation and set of instructions,
+												we determine the state to transition to, the symbol to write at the current position, and whether to move one symbol forward or
+												backward (which translates to moving the pointer either (+1 or R) or (-1 or L) in a theoretical Turing machine).</p>
+											<p>The state transition rules are determined by creating state diagram for different operations which basically indicate the states and how the rules work.
+												The diagrams vary in size based on how complicated an operation is and how many states it utilizes.</p>
+												<p>
+												The image here is a sample state diagram for the operation of checking whether a string of 0s and 1s is a palindrome or not.</p>
+											<ul class="actions">
+												<li><a href="" class="button">Learn more</a></li>
+											</ul>
+										</div>
+									</div>
+								</section>
+							</section>
+
+					</div>
+
+
+				<!-- Footer -->
+					<footer id="footer">
+						<div class="inner">
+							<ul class="icons">
+								<li><a href="https://github.com/olincollege/TuringMachine" class="icon brands alt fa-github"><span class="label">GitHub</span></a></li>		</ul>
+							<ul class="copyright">
+								<li>&copy; 2023-Present. All rights reserved by the <a href="index.html" class="link">People</a> who developed it. For queries, reach out to one of us, and we'd be happy to connect!</li>
+							</ul>
+						</div>
+					</footer>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>
