@@ -9,6 +9,10 @@ TM_transition_output booleanNot(const TM_transition_input& input) {
             output.symbol = '#';
             output.move_pointer = 1;
             return output;
+        } else {
+            output.state = 66;
+            output.symbol = input.symbol;
+            output.move_pointer = 1;
         }
     } else if (input.state == 2) {
         if (input.symbol == '1') {
@@ -36,6 +40,10 @@ TM_transition_output booleanNot(const TM_transition_input& input) {
             output.symbol = '_';
             output.move_pointer = 1;
             return output;
+        } else {
+            output.state = 66;
+            output.symbol = input.symbol;
+            output.move_pointer = 1;
         }
     } else if (input.state == 3) {
         if (input.symbol == '0') {
@@ -58,6 +66,10 @@ TM_transition_output booleanNot(const TM_transition_input& input) {
             output.symbol = '_';
             output.move_pointer = 1;
             return output;
+        } else {
+            output.state = 66;
+            output.symbol = input.symbol;
+            output.move_pointer = 1;
         }
     } else if (input.state == 4) {
         if (input.symbol == '0') {
@@ -80,6 +92,10 @@ TM_transition_output booleanNot(const TM_transition_input& input) {
             output.symbol = '_';
             output.move_pointer = 1;
             return output;
+        } else {
+            output.state = 66;
+            output.symbol = input.symbol;
+            output.move_pointer = 1;
         }
     } else if (input.state == 5) {
         if (input.symbol == '0') {
@@ -97,6 +113,10 @@ TM_transition_output booleanNot(const TM_transition_input& input) {
             output.symbol = 'X';
             output.move_pointer = 1;
             return output;
+        } else {
+            output.state = 66;
+            output.symbol = input.symbol;
+            output.move_pointer = 1;
         }
     } else if (input.state == 6) {
         if (input.symbol == '0') {
@@ -114,6 +134,10 @@ TM_transition_output booleanNot(const TM_transition_input& input) {
             output.symbol = 'X';
             output.move_pointer = 1;
             return output;
+        } else {
+            output.state = 66;
+            output.symbol = input.symbol;
+            output.move_pointer = 1;
         }
     } else if (input.state == 7) {
         if (input.symbol == 'X') {
@@ -126,6 +150,10 @@ TM_transition_output booleanNot(const TM_transition_input& input) {
             output.symbol = '#';
             output.move_pointer = -1;
             return output;
+        } else {
+            output.state = 66;
+            output.symbol = input.symbol;
+            output.move_pointer = 1;
         }
     } else if (input.state == 8) {
         if (input.symbol == '0') {
@@ -143,10 +171,16 @@ TM_transition_output booleanNot(const TM_transition_input& input) {
             output.symbol = 'X';
             output.move_pointer = 1;
             return output;
+        } else {
+            output.state = 66;
+            output.symbol = input.symbol;
+            output.move_pointer = 1;
         }
     } else {
         output.state = 66;
         output.symbol = input.symbol;
         output.move_pointer = 1;
     }
+
+    return output;
 }
