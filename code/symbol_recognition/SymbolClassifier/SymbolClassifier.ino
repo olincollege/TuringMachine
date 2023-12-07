@@ -127,10 +127,8 @@ bool capture_still() {
     total_features += features[i];
   }
 
-  Serial.println(total_features);
-
   // Classify symbols using conditionals
-  if (total_features < 5200) {
+  if (total_features < 3000) {
     Serial.println("1");
   }
   else {

@@ -375,8 +375,8 @@ void TM_Motor_Movement::drawHash() {
 
 void TM_Motor_Movement::drawAll() {
     for (int i = 0; i <= start_bitstring.length()-1; i++) {
-        Serial.println(start_bitstring[i]);
-        Serial.println(start_bitstring[i] == '0');
+        //Serial.println(start_bitstring[i]);
+        //Serial.println(start_bitstring[i] == '0');
         if (start_bitstring[i] == '0') {
             // Serial.println("Drawing Zero!");
             drawZero();

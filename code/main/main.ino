@@ -36,8 +36,8 @@ palindrome: 010, 1001, 111, etc. (any string that consists of 0s and 1s)
 //------------------------------------------------------------------------------//
 //------------------------------------------------------------------------------//
 // Provide the input operation and input string to perform on the Turing Machine
-String operation = "";
-String inputString = "";
+String operation = "anbn";
+String inputString = "10";
 //------------------------------------------------------------------------------//
 //------------------------------------------------------------------------------//
 
@@ -96,6 +96,25 @@ TM_Motor_Movement TM(
 );
 
 /*==============================================================================*/
+// LCD display
+/*==============================================================================*/
+// Instantiate LCD
+LiquidCrystal_I2C lcd(0x27,20,4);
+
+void displayOnLCD(String line1, String line2, String line3, String line4) {
+    lcd.clear();
+    lcd.setCursor(0, 0);
+    lcd.print(line1);
+    lcd.setCursor(0, 1);
+    lcd.print(line2);
+    lcd.setCursor(0, 2);
+    lcd.print(line3);
+    lcd.setCursor(0, 3);
+    lcd.print(line4);
+}
+
+
+/*==============================================================================*/
 // Read Symbol
 /*==============================================================================*/
 char first_bit, second_bit, third_bit;
@@ -104,17 +123,17 @@ char symbol;
 
 char readSymbol() {
     // Read first bit and move one symbol forward
-    delay(2000);
+    delay(5000);
     first_bit = Serial.read();
     TM.moveOneBitForward();
 
     // Read second bit and move one symbol forward
-    delay(2000);
+    delay(5000);
     second_bit = Serial.read();
     TM.moveOneBitForward();
 
     // Read third bit and move one symbol forward
-    delay(2000);
+    delay(5000);
     third_bit = Serial.read();
 
     // create symbol bitstring
@@ -166,6 +185,11 @@ char stateTransition_anbn() {
     anbn_input.state = 1;
     anbn_input.symbol = readSymbol();
 
+    displayOnLCD("Turing Machine",
+                 "",
+                 "State: " + anbn_input.state,
+                 "Symbol: " + anbn_input.symbol);
+
     while (anbn_input.state < 100) {
         // Obtain one transition output
         anbn_output = anbn(anbn_input);
@@ -205,6 +229,11 @@ char stateTransition_anbn() {
         // Next state and symbol
         anbn_input.state = anbn_output.state;
         anbn_input.symbol = readSymbol();
+
+        displayOnLCD("Turing Machine",
+                     "",
+                     "State: " + anbn_input.state,
+                     "Symbol: " + anbn_input.symbol);
     }
 }
 
@@ -219,6 +248,11 @@ char stateTransition_palindrome() {
     // Initialize start state and read initial symbol
     palindrome_input.state = 1;
     palindrome_input.symbol = readSymbol();
+
+    displayOnLCD("Turing Machine",
+                 "",
+                 "State: " + palindrome_input.state,
+                 "Symbol: " + palindrome_input.symbol);
 
     while (palindrome_input.state < 100) {
         // Obtain one transition output
@@ -259,6 +293,11 @@ char stateTransition_palindrome() {
         // Next state and symbol
         palindrome_input.state = palindrome_output.state;
         palindrome_input.symbol = readSymbol();
+
+        displayOnLCD("Turing Machine",
+                     "",
+                     "State: " + palindrome_input.state,
+                     "Symbol: " + palindrome_input.symbol);
     }
 }
 
@@ -284,36 +323,52 @@ char stateTransition(const String& operation) {
 /*==============================================================================*/
 // Arduino
 /*==============================================================================*/
+
 // To store the output of TM computation
 char result;
 
 // Arduino
 void setup() {
+    // LCD
+    lcd.init(); 
+    lcd.backlight(); 
+    lcd.setCursor(0,0);
+    lcd.print("Turing Machine");
+    lcd.setCursor(0,1);     
+    lcd.print("Operation " + operation);  
+    lcd.setCursor(0,2);     
+    lcd.print("String " + inputString);  
+    lcd.setCursor(0,3);     
+    lcd.print("Computing..."); 
+
     // Setup motor functions
     TM.begin();
-    delay(2000);
+    delay(10000);
 
     // Draw the inputString
     TM.drawAll();
 
     // TODO - Move to start of string (first symbol)
+
+    // Obtain computation result using State Transition
+    result = stateTransition(operation);
+
+    // Display final result on LCD
+    String resultMessage;
+    if (result == 'A') {
+        resultMessage = "Accept";
+    } else if (result == 'R') {
+        resultMessage = "Reject";
+    } else {
+        resultMessage = "Error!";
+    }
+
+    displayOnLCD("Turing Machine",
+                 "Operation " + operation,
+                 "String " + inputString,
+                 "Result: " + resultMessage);
 }
 
-// Flag to limit execution to one computation
-uint8_t flag = 1;
-
 void loop() {
-
-    if (flag == 1) {
-        // Obtain computation result using State Transition
-        result = stateTransition(operation);
-
-        // Increment flag to not allow running computation again after one run
-        flag += 1;
-    }
-    else {
-        // TODO - do something to indicate inputting new operation and/or string
-    }
-
-    // TODO - do something with result
+ // Nothing needed
 }
