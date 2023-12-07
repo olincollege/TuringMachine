@@ -3,15 +3,15 @@
 String bitstring ="0110";
 uint8_t film_dc_pin = 3;
 uint8_t stepper_pin = 1;
-uint8_t eraser_actuation_pin = 8;
-uint8_t eraser_control_pin = 3;
+uint8_t eraser_actuation_pin = 6;
+uint8_t eraser_control_pin = 4;
 uint8_t eraser_actuation_min = 45;
 uint8_t eraser_actuation_max = 130;
 uint8_t eraser_speed = 255;
 uint8_t stepper_total_steps = 200;
 uint8_t stepper_move_steps = 4;
-uint8_t stepper_speed = 10;
-uint8_t dc_film_speed = 100;
+uint8_t stepper_speed = 30;
+uint8_t dc_film_speed = 120;
 uint8_t draw_actuation_servo_pin = 10;
 uint8_t draw_control_servo_pin = 9;
 uint8_t marker_up_pos = 180;
@@ -20,10 +20,9 @@ uint8_t head_min_pos = 5;
 uint8_t head_max_pos = 75;
 uint8_t zero_lines = 2;
 uint8_t bit_space = 40;
-uint8_t eraser_head_distance = 100;
-uint8_t eraser_distance = 50;
-uint8_t eraser_to_draw = 50;
-uint8_t eraser_to_write_dist = 50;
+uint8_t eraser_head_distance = 150;
+uint8_t eraser_distance = 150;
+uint8_t eraser_to_write_dist = 67;
 
 TM_Motor_Movement TM(
   bitstring,
@@ -48,7 +47,6 @@ TM_Motor_Movement TM(
   bit_space,
   eraser_head_distance,
   eraser_distance,
-  eraser_to_draw,
   eraser_to_write_dist
 );
 
@@ -59,13 +57,6 @@ void setup() {
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
-  TM.drawBitZero();
-  delay(2000);
-  TM.moveOneBitForward();
-  delay(2000);
-  TM.drawBitOne();
-  delay(2000);
-  TM.moveOneBitForward();
-  delay(2000);
+  TM.moveFilmForward();
+  delay(20);
 }
