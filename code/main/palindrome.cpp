@@ -17,6 +17,10 @@ TM_transition_output palindrome(const TM_transition_input& input) {
             output.state = 77;
             output.symbol = input.symbol;
             output.move_pointer = 1;
+        } else {
+            output.state = 66;
+            output.symbol = input.symbol;
+            output.move_pointer = 1;
         }
     } else if (input.state == 2) {
         if (input.symbol == '0' || input.symbol == '1') {
@@ -27,6 +31,10 @@ TM_transition_output palindrome(const TM_transition_input& input) {
             output.state = 4;
             output.symbol = input.symbol;
             output.move_pointer = -1;
+        } else {
+            output.state = 66;
+            output.symbol = input.symbol;
+            output.move_pointer = 1;
         }
     } else if (input.state == 3) {
         if (input.symbol == '0' || input.symbol == '1') {
@@ -37,6 +45,10 @@ TM_transition_output palindrome(const TM_transition_input& input) {
             output.state = 5;
             output.symbol = input.symbol;
             output.move_pointer = -1;
+        } else {
+            output.state = 66;
+            output.symbol = input.symbol;
+            output.move_pointer = 1;
         }
     } else if (input.state == 4) {
         if (input.symbol == '0') {
@@ -47,6 +59,10 @@ TM_transition_output palindrome(const TM_transition_input& input) {
             output.state = 77;
             output.symbol = input.symbol;
             output.move_pointer = 1;
+        } else {
+            output.state = 66;
+            output.symbol = input.symbol;
+            output.move_pointer = 1;
         }
     } else if (input.state == 5) {
         if (input.symbol == '1') {
@@ -55,6 +71,10 @@ TM_transition_output palindrome(const TM_transition_input& input) {
             output.move_pointer = -1;
         } else if (input.symbol == 'X' || input.symbol == 'Y') {
             output.state = 77;
+            output.symbol = input.symbol;
+            output.move_pointer = 1;
+        } else {
+            output.state = 66;
             output.symbol = input.symbol;
             output.move_pointer = 1;
         }
@@ -70,6 +90,10 @@ TM_transition_output palindrome(const TM_transition_input& input) {
         } else if (input.symbol == 'Y') {
             output.state = 1;
             output.symbol = 'Y';
+            output.move_pointer = 1;
+        } else {
+            output.state = 66;
+            output.symbol = input.symbol;
             output.move_pointer = 1;
         }
     } else {
