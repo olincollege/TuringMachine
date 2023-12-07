@@ -17,12 +17,23 @@ List of operations currently supported:
 
 - **anbn** (check whether a string has an equal number of 0s and 1s)
 - **palindrome** (check whether a string of 0s and 1s is a palindrome)
+- **booleanNot** (check whether a string is the boolean not/complement of another string)
 
-### Strings
+### Strings/Language
 
-Sample string input formats for operations:
+Sample string input formats or languages accepted by the Turing Machine for operations:
 
 **anbn**: 00, 1010, 0100, etc. (any string of even length that consists of 0s and 1s)
 
 **palindrome**: 010, 1001, 111, etc. (any string that consists of 0s and 1s)
 
+**booleanNot**: #0#1, #110#001, #10#01, etc. (two strings u and v that consist of 0s and 1s in the form #u#v)
+
+### Brief structure of repo
+
+**CAD** directory houses all the design, fabrication, and mechanical aspects of the project.
+
+**code** directory contains the entire codebase for simulating the Turing Machine. The subdirectory **main** contains the code flashed to Arduino UNO for motor functions,
+state transition, and state transition operations. The subdirectory **symbol_recognition** contains the code for classifying the bits written on tape and is flashed to the ESP32-Cam.
+
+**website** directory contains the entire code for our hosted website.

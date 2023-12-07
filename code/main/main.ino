@@ -1,5 +1,5 @@
 /*
-======================================================================================
+=========================================================================================================
 
 Main script for the Turing Machine
 
@@ -8,20 +8,23 @@ Learn more at: https://olincollege.github.io/pie-2023-03/turing-machine/
 Developed by Sparsh Gupta, Mark Belanger, Noah Rand, Will Young, and Joe Leedy
 at Olin College of Engineering, 2023.
 
-======================================================================================
+=========================================================================================================
 
 List of operations currently supported:
 
 - anbn (check whether a string has an equal number of 0s and 1s)
 - palindrome (check whether a string of 0s and 1s is a palindrome)
-======================================================================================
+- booleanNot (check whether a string is the boolean not/complement of another string)
 
-Sample string input formats for operations:
+=========================================================================================================
+
+Sample string input formats or languages accepted by the Turing Machine for operations:
 
 anbn: 00, 1010, 0101, etc. (any string of even length that consists of 0s and 1s)
 palindrome: 010, 1001, 111, etc. (any string that consists of 0s and 1s)
+booleanNot: #0#1, #110#001, #10#01, etc. (two strings u and v that consist of 0s and 1s in the form #u#v)
 
-======================================================================================
+=========================================================================================================
 */
 
 // Imports
@@ -32,12 +35,13 @@ palindrome: 010, 1001, 111, etc. (any string that consists of 0s and 1s)
 #include "LiquidCrystal_I2C.h"
 #include "anbn.h"
 #include "palindrome.h"
+#include "boolean_not.h"
 
 //------------------------------------------------------------------------------//
 //------------------------------------------------------------------------------//
 // Provide the input operation and input string to perform on the Turing Machine
-String operation = "anbn";
-String inputString = "10";
+String operation = "";
+String inputString = "";
 //------------------------------------------------------------------------------//
 //------------------------------------------------------------------------------//
 
@@ -174,7 +178,9 @@ void drawSymbol(char symbol_to_draw) {
     }
 }
 
+// ---------------------
 // anbn state transition
+// ---------------------
 char stateTransition_anbn() {
 
     // Defining input and output
@@ -237,8 +243,9 @@ char stateTransition_anbn() {
     }
 }
 
-
+// ---------------------------
 // palindrome state transition
+// ---------------------------
 char stateTransition_palindrome() {
 
     // Defining input and output
@@ -301,6 +308,71 @@ char stateTransition_palindrome() {
     }
 }
 
+// ---------------------------
+// booleanNot state transition
+// ---------------------------
+char stateTransition_booleanNot() {
+
+    // Defining input and output
+    TM_transition_input booleanNot_input;
+    TM_transition_output booleanNot_output;
+
+    // Initialize start state and read initial symbol
+    booleanNot_input.state = 1;
+    booleanNot_input.symbol = readSymbol();
+
+    displayOnLCD("Turing Machine",
+                 "",
+                 "State: " + booleanNot_input.state,
+                 "Symbol: " + booleanNot_input.symbol);
+
+    while (booleanNot_input.state < 100) {
+        // Obtain one transition output
+        booleanNot_output = booleanNot(booleanNot_input);
+
+        // Halting state: Accept or Reject
+        if (booleanNot_output.state == 77) {
+            return 'A';
+        } else if (booleanNot_output.state == 66) {
+            return 'R';
+        }
+
+        // Write new symbol or skip drawing if same symbol
+        if (booleanNot_input.symbol != booleanNot_output.symbol) {
+
+            // Erase input symbol first
+            TM.eraseOneSymbol();
+
+            // Draw output symbol
+            drawSymbol(booleanNot_output.symbol);
+
+            // Move pointer based on anbn_output
+            if (booleanNot_output.move_pointer == 1) {
+                TM.moveOneSymbolForward();
+            } else {
+                TM.moveOneSymbolBackward();
+            }
+        }
+        else {
+            // Just move pointer based on anbn_output
+            if (booleanNot_output.move_pointer == 1) {
+                TM.moveOneSymbolForward();
+            } else {
+                TM.moveOneSymbolBackward();
+            }
+        }
+
+        // Next state and symbol
+        booleanNot_input.state = booleanNot_output.state;
+        booleanNot_input.symbol = readSymbol();
+
+        displayOnLCD("Turing Machine",
+                     "",
+                     "State: " + booleanNot_input.state,
+                     "Symbol: " + booleanNot_input.symbol);
+    }
+}
+
 
 char stateTransitionResult; // To return the result of computation
 // Select stateTransition TM based on operation
@@ -313,7 +385,11 @@ char stateTransition(const String& operation) {
         stateTransitionResult = stateTransition_palindrome();
         return stateTransitionResult;
     }
-        // TODO - add other operations later
+    else if (operation == "booleanNot") {
+        stateTransitionResult = stateTransition_booleanNot();
+        return stateTransitionResult;
+    }
+    // TODO - add other operations
     else {
         return 'R';
     }
