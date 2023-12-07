@@ -10,11 +10,28 @@ class TM_Motor_Movement
 {
 public:
     TM_Motor_Movement(
+            // starting iiput bitstring
             String bitstring,
+
+            // Pin on motor shield that the tape actuation DC motors use.
+            // Pins are M1, M2, M3, or M4 on the shield and are
+            // represented by 1, 2, 3, or 4, respectively.
             uint8_t film_dc_pin,
+
+            // Pin on motor shield that the tape actuation stepper motor uses.
+            // Pins are M1, M2, M3, or M4 on the shield and are
+            // represented by 1, 2, 3, or 4, respectively.
             uint8_t stepper_pin,
+
+            // Pin connected to eraser actuation servo
             uint8_t eraser_actuation_pin,
+
+            // Pin on motor shield that the eraser DC motor uses.
+            // Pins are M1, M2, M3, or M4 on the shield and are
+            // represented by 1, 2, 3, or 4, respectively.
             uint8_t eraser_control_pin,
+
+            // Max value that the
             uint8_t eraser_actuation_min,
             uint8_t eraser_actuation_max,
             uint8_t eraser_speed,
@@ -32,7 +49,6 @@ public:
             uint8_t bit_space,
             uint8_t eraser_head_distance,
             uint8_t eraser_distance,
-            uint8_t eraser_to_draw,
             uint8_t eraser_to_write_dist
     );
     void begin();
@@ -58,6 +74,8 @@ public:
     void moveOneBitForward();
     void moveOneBitBackward();
     void moveOneSymbolBackward();
+    void eraserOn();
+    void eraserOff();
     void moveToErase();
     void eraseBackward();
     void eraserToWrite();
