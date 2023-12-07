@@ -5,7 +5,7 @@
 #include "string.h"
 
 TM_Motor_Movement::TM_Motor_Movement(
-    // starting iiput bitstring
+    // starting input bitstring
     String  bitstring,
     // 
     uint8_t film_dc_pin,
@@ -64,29 +64,29 @@ TM_Motor_Movement::TM_Motor_Movement(
   };
 
   void TM_Motor_Movement::begin() {
-    Serial.begin(9600);
+    // Serial.begin(9600);
     AFMS = Adafruit_MotorShield();
-    Serial.println("MotorShield Found!");
+    // Serial.println("MotorShield Found!");
     fineFilmControl = AFMS.getStepper(stepperM_total_steps, stepperM_pin);
-    Serial.println("Stepper Found!");
+    // Serial.println("Stepper Found!");
     coarseFilmControl = AFMS.getMotor(film_dcM_pin);
-    Serial.println("DC Motors Found!");
+    // Serial.println("DC Motors Found!");
     eraserControl = AFMS.getMotor(eraser_controlM_pin);
-    Serial.println("Eraser Found!");
+    // Serial.println("Eraser Found!");
     eraserActuation.attach(eraser_actuationM_pin);
     eraserActuation.write(eraser_actuationM_max);
     delay(300);
-    Serial.println("Eraser acuation home!");
+    // Serial.println("Eraser acuation home!");
     drawingActuation.attach(draw_actuation_servoM_pin);
     drawingActuation.write(marker_up_posi);
     delay(300);
-    Serial.println("Drawing acuation home!");
+    // Serial.println("Drawing acuation home!");
     drawingControl.attach(draw_control_servoM_pin);
     drawingControl.write(head_min);
     delay(300);
-    Serial.println("Drawing control home!");
+    // Serial.println("Drawing control home!");
     AFMS.begin();
-    Serial.println("Initiation Successful!");
+    // Serial.println("Initiation Successful!");
   }
 
   void TM_Motor_Movement::moveFilmForward() {
@@ -96,7 +96,7 @@ TM_Motor_Movement::TM_Motor_Movement(
     fineFilmControl->step(stepperM_move_steps, FORWARD, MICROSTEP);
     coarseFilmControl->setSpeed(0);
     delay(500);
-    Serial.println("Film Forward!");
+    // Serial.println("Film Forward!");
   }
 
   void TM_Motor_Movement::moveFilmBackward() {
@@ -106,8 +106,7 @@ TM_Motor_Movement::TM_Motor_Movement(
     fineFilmControl->step(stepperM_move_steps, BACKWARD, MICROSTEP);
     coarseFilmControl->setSpeed(0); 
     delay(500);
-    Serial.println("Film Backward!");
-
+    // Serial.println("Film Backward!");
   }
 
   void TM_Motor_Movement::moveOneBitForward() {
@@ -148,24 +147,23 @@ TM_Motor_Movement::TM_Motor_Movement(
 
   void TM_Motor_Movement::eraserDown() {
     eraserActuation.write(eraser_actuationM_min);
-    Serial.println("Eraser Down!");
+    // Serial.println("Eraser Down!");
   }
 
   void TM_Motor_Movement::eraserUp() {
     eraserActuation.write(eraser_actuationM_max);
-    Serial.println("Eraser Up!");
-
+    // Serial.println("Eraser Up!");
   }
 
   void TM_Motor_Movement::eraserOn() {
     eraserControl->setSpeed(eraserM_speed);
     eraserControl->run(FORWARD);
-    Serial.println("Eraser on!");
+    // Serial.println("Eraser on!");
   }
 
   void TM_Motor_Movement::eraserOff() {
     eraserControl->setSpeed(0);
-    Serial.println("Eraser off!");
+    // Serial.println("Eraser off!");
     }
 
   void TM_Motor_Movement::moveToErase(){
@@ -217,7 +215,7 @@ TM_Motor_Movement::TM_Motor_Movement(
 
     drawingControl.write(head_max);
     delay(500);
-    Serial.println("Positive Line!");
+    // Serial.println("Positive Line!");
   }
 
   void TM_Motor_Movement::headNegativeVerticalLine() {
@@ -227,7 +225,7 @@ TM_Motor_Movement::TM_Motor_Movement(
     // }
     drawingControl.write(head_min);
     delay(500);
-    Serial.println("Negative Line!");
+    // Serial.println("Negative Line!");
   }
 
 
@@ -239,7 +237,7 @@ TM_Motor_Movement::TM_Motor_Movement(
     //   delay(20);
     // }
     drawingActuation.write(marker_down_posi);
-    Serial.println("Marker Down!");
+    // Serial.println("Marker Down!");
   }
 
   void TM_Motor_Movement::markerUp() {
@@ -249,7 +247,7 @@ TM_Motor_Movement::TM_Motor_Movement(
     // }
     drawingActuation.write(marker_up_posi);
 
-    Serial.println("Marker Up!");
+    // Serial.println("Marker Up!");
   }
 
 
@@ -380,13 +378,13 @@ TM_Motor_Movement::TM_Motor_Movement(
     Serial.println(start_bitstring[i]);
     Serial.println(start_bitstring[i] == '0');
     if (start_bitstring[i] == '0') {
-      Serial.println("Drawing Zero!");
+      // Serial.println("Drawing Zero!");
       drawZero();
       delay(500);
       moveOneBitForward();
       delay(500);
        } else {
-          Serial.println("Drawing One!");
+          // Serial.println("Drawing One!");
           drawOne();
           delay(500);
           moveOneBitForward();
