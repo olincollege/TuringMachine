@@ -19,10 +19,10 @@ uint8_t marker_down_pos = 120;
 uint8_t head_min_pos = 5;
 uint8_t head_max_pos = 75;
 uint8_t zero_lines = 2;
-uint8_t bit_space = 40;
+uint8_t bit_space = 25;
 uint8_t eraser_head_distance = 150;
-uint8_t eraser_distance = 150;
-uint8_t eraser_to_write_dist = 67;
+uint8_t eraser_distance = 130;
+uint8_t eraser_to_write_dist = 49;
 
 TM_Motor_Movement TM(
   bitstring,
@@ -54,9 +54,10 @@ void setup() {
 //   // put your setup code here, to run once:
   TM.begin();
   delay(2000);
+
+  TM.drawZero();
 }
 
 void loop() {
-  TM.moveFilmForward();
-  delay(20);
+
 }
