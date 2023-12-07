@@ -195,10 +195,12 @@ TM_Motor_Movement::TM_Motor_Movement(
 
   void TM_Motor_Movement::eraseOneSymbol() {
     moveToErase();
+    delay(500);
     eraserDown();
-    eraserControl->setSpeed(eraserM_speed);
+    delay(500);
+    eraserOn();
     eraseBackward();
-    eraserControl->setSpeed(0);
+    eraserOff();
     delay(500);
     eraserUp();
     eraserToWrite();
@@ -294,6 +296,8 @@ TM_Motor_Movement::TM_Motor_Movement(
     delay(500);
     drawBitOne();
     delay(500);
+    moveOneBitForward();
+    delay(500);
   }
 
   void TM_Motor_Movement::drawZero() {
@@ -306,6 +310,8 @@ TM_Motor_Movement::TM_Motor_Movement(
     moveOneBitForward();
     delay(500);
     drawBitZero();
+    delay(500);
+    moveOneBitForward();
     delay(500);
   }
 
@@ -320,6 +326,8 @@ TM_Motor_Movement::TM_Motor_Movement(
     delay(500);
     drawBitOne();
     delay(500);
+    moveOneBitForward();
+    delay(500);
   }
 
   void TM_Motor_Movement::drawY() {
@@ -332,6 +340,8 @@ TM_Motor_Movement::TM_Motor_Movement(
     moveOneBitForward();
     delay(500);
     drawBitZero();
+    delay(500);
+    moveOneBitForward();
     delay(500);
   }
 
@@ -346,6 +356,8 @@ TM_Motor_Movement::TM_Motor_Movement(
     delay(500);
     drawBitOne();
     delay(500);
+    moveOneBitForward();
+    delay(500);
   }
 
   void TM_Motor_Movement::drawHash() {
@@ -359,6 +371,8 @@ TM_Motor_Movement::TM_Motor_Movement(
     delay(500);
     drawBitZero();
     delay(500);
+    moveOneBitForward();
+    delay(500);
   } 
 
   void TM_Motor_Movement::drawAll() {
@@ -367,13 +381,13 @@ TM_Motor_Movement::TM_Motor_Movement(
     Serial.println(start_bitstring[i] == '0');
     if (start_bitstring[i] == '0') {
       Serial.println("Drawing Zero!");
-      drawBitZero();
+      drawZero();
       delay(500);
       moveOneBitForward();
       delay(500);
        } else {
           Serial.println("Drawing One!");
-          drawBitOne();
+          drawOne();
           delay(500);
           moveOneBitForward();
           delay(500);
@@ -383,11 +397,11 @@ TM_Motor_Movement::TM_Motor_Movement(
 
   void TM_Motor_Movement::goHome() {
     for (int i = 0; i <= start_bitstring.length(); i++) {
-    fineFilmControl->setSpeed(stepperM_speed);
-    coarseFilmControl->setSpeed(dcM_film_speed);
-    coarseFilmControl->run(BACKWARD);
-    fineFilmControl->step(bit_spacing, BACKWARD, MICROSTEP);
-    coarseFilmControl->setSpeed(0);
-    delay(500);
+      fineFilmControl->setSpeed(stepperM_speed);
+      coarseFilmControl->setSpeed(dcM_film_speed);
+      coarseFilmControl->run(BACKWARD);
+      fineFilmControl->step(bit_spacing, BACKWARD, MICROSTEP);
+      coarseFilmControl->setSpeed(0);
+      delay(500);
     }
   }
