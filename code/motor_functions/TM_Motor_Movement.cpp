@@ -148,13 +148,21 @@ TM_Motor_Movement::TM_Motor_Movement(
   }
 
   void TM_Motor_Movement::eraserDown() {
-    eraserActuation.write(eraser_actuationM_min);
+    //eraserActuation.write(eraser_actuationM_min);
     // Serial.println("Eraser Down!");
+    for (int i = eraser_actuationM_max; i >= eraser_actuationM_min; i -=5) {
+      eraserActuation.write(i);
+      delay(20);
+    }        
   }
 
   void TM_Motor_Movement::eraserUp() {
-    eraserActuation.write(eraser_actuationM_max);
+    //eraserActuation.write(eraser_actuationM_max);
     // Serial.println("Eraser Up!");
+    for (int i = eraser_actuationM_min; i <= eraser_actuationM_max; i +=5) {
+      eraserActuation.write(i);
+      delay(20);
+    }    
   }
 
   void TM_Motor_Movement::eraserOn() {
@@ -209,23 +217,23 @@ TM_Motor_Movement::TM_Motor_Movement(
 
 
   void TM_Motor_Movement::headPositiveVerticalLine() {
-    // for (int i = head_min; i <= head_max; i +=5) {
-    //   drawingControl.write(i);
-    //   delay(20);
-    // }
+    for (int i = head_min; i <= head_max; i +=5) {
+      drawingControl.write(i);
+      delay(20);
+    }
   
 
-    drawingControl.write(head_max);
+    //drawingControl.write(head_max);
     delay(500);
     // Serial.println("Positive Line!");
   }
 
   void TM_Motor_Movement::headNegativeVerticalLine() {
-    // for (int i = head_max; i >= head_min; i-=5) {
-    //   drawingControl.write(i);
-    //   delay(20);
-    // }
-    drawingControl.write(head_min);
+    for (int i = head_max; i >= head_min; i-=5) {
+      drawingControl.write(i);
+      delay(20);
+    }
+    //drawingControl.write(head_min);
     delay(500);
     // Serial.println("Negative Line!");
   }
@@ -234,20 +242,22 @@ TM_Motor_Movement::TM_Motor_Movement(
 
 
   void TM_Motor_Movement::markerDown() {
-    // for (int i = marker_up_posi; i >= marker_down_posi; i -=3) {
-    //   drawingActuation.write(i);
-    //   delay(20);
-    // }
-    drawingActuation.write(marker_down_posi);
+    for (int i = marker_up_posi; i >= marker_down_posi; i -=3) {
+      drawingActuation.write(i);
+      delay(20);
+    }
+    delay(500);
+    //drawingActuation.write(marker_down_posi);
     // Serial.println("Marker Down!");
   }
 
   void TM_Motor_Movement::markerUp() {
-    // for (int i = marker_down_posi; i <= marker_up_posi; i +=3) {
-    //   drawingActuation.write(i);
-    //   delay(20);
-    // }
-    drawingActuation.write(marker_up_posi);
+    for (int i = marker_down_posi; i <= marker_up_posi; i +=3) {
+      drawingActuation.write(i);
+      delay(20);
+    }
+    delay(500);
+    //drawingActuation.write(marker_up_posi);
 
     // Serial.println("Marker Up!");
   }
