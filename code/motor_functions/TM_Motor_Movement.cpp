@@ -227,13 +227,13 @@ TM_Motor_Movement::TM_Motor_Movement(
     delay(500);
     fineFilmControl->setSpeed(stepperM_speed);
     coarseFilmControl->setSpeed(dcM_film_speed);
-    coarseFilmControl->run(FORWARD);
+    coarseFilmControl->run(BACKWARD);
     fineFilmControl->step(erase_all_dist, BACKWARD, MICROSTEP);
     coarseFilmControl->setSpeed(0);
     delay(500);
     fineFilmControl->setSpeed(stepperM_speed);
     coarseFilmControl->setSpeed(dcM_film_speed);
-    coarseFilmControl->run(FORWARD);
+    coarseFilmControl->run(BACKWARD);
     fineFilmControl->step(erase_all_dist, BACKWARD, MICROSTEP);
     coarseFilmControl->setSpeed(0);
     delay(500);
