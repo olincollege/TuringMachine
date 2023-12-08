@@ -5,7 +5,7 @@ uint8_t film_dc_pin = 3;
 uint8_t stepper_pin = 1;
 uint8_t eraser_actuation_pin = 6;
 uint8_t eraser_control_pin = 4;
-uint8_t eraser_actuation_min = 45;
+uint8_t eraser_actuation_min = 0;
 uint8_t eraser_actuation_max = 130;
 uint8_t eraser_speed = 255;
 uint8_t stepper_total_steps = 200;
@@ -23,6 +23,7 @@ uint8_t bit_space = 25;
 uint8_t eraser_head_distance = 150;
 uint8_t eraser_distance = 130;
 uint8_t eraser_to_write_dist = 49;
+uint8_t write_to_camera = 125;
 
 TM_Motor_Movement TM(
   bitstring,
@@ -47,15 +48,17 @@ TM_Motor_Movement TM(
   bit_space,
   eraser_head_distance,
   eraser_distance,
-  eraser_to_write_dist
+  eraser_to_write_dist,
+  write_to_camera
 );
 
 void setup() {
 //   // put your setup code here, to run once:
   TM.begin();
   delay(2000);
-
-  TM.drawZero();
+  TM.drawAll();
+  delay(2000);
+  TM.goToCamera();
 }
 
 void loop() {

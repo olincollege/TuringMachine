@@ -29,7 +29,8 @@ TM_Motor_Movement::TM_Motor_Movement(
     uint8_t bit_space,
     uint8_t eraser_head_distance,
     uint8_t eraser_distance,
-    uint8_t eraser_to_write_dist
+    uint8_t eraser_to_write_dist,
+    uint8_t write_to_camera
     ) : 
 
   start_bitstring(bitstring),
@@ -58,13 +59,14 @@ TM_Motor_Movement::TM_Motor_Movement(
   head_min(head_min_pos),
   head_max(head_max_pos),
   zero_lines_num(zero_lines),
-  bit_spacing(bit_space)
+  bit_spacing(bit_space),
+  write_to_cam(write_to_camera)
   {
 
   };
 
   void TM_Motor_Movement::begin() {
-    // Serial.begin(9600);
+    Serial.begin(9600);
     AFMS = Adafruit_MotorShield();
     // Serial.println("MotorShield Found!");
     fineFilmControl = AFMS.getStepper(stepperM_total_steps, stepperM_pin);
@@ -375,26 +377,38 @@ TM_Motor_Movement::TM_Motor_Movement(
 
   void TM_Motor_Movement::drawAll() {
    for (int i = 0; i <= start_bitstring.length()-1; i++) {
-    Serial.println(start_bitstring[i]);
-    Serial.println(start_bitstring[i] == '0');
+    //Serial.println(start_bitstring[i]);
+    //Serial.println(start_bitstring[i] == '0');
     if (start_bitstring[i] == '0') {
       // Serial.println("Drawing Zero!");
       drawZero();
       delay(500);
-      moveOneBitForward();
       delay(500);
        } else {
           // Serial.println("Drawing One!");
           drawOne();
           delay(500);
-          moveOneBitForward();
           delay(500);
       }
     }
    }
 
   void TM_Motor_Movement::goHome() {
-    for (int i = 0; i <= start_bitstring.length(); i++) {
+    int bit_space_count = 0;
+
+    for (int i = 0; i <= start_bitstring.length() - 1; i++) { 
+      if (start_bitstring[i] == '0') {
+      bit_space_count += 5;
+        //Serial.println(bit_space_count);
+        } else {
+      bit_space_count += 4;
+      //Serial.println(bit_space_count);
+      }
+    }
+
+    //Serial.println(bit_space_count);
+
+    for (int i = 0; i <= bit_space_count - 1; i++) {
       fineFilmControl->setSpeed(stepperM_speed);
       coarseFilmControl->setSpeed(dcM_film_speed);
       coarseFilmControl->run(BACKWARD);
@@ -403,3 +417,12 @@ TM_Motor_Movement::TM_Motor_Movement(
       delay(500);
     }
   }
+  void TM_Motor_Movement::goToCamera() {
+    goHome();
+    delay(2000);
+    fineFilmControl->setSpeed(stepperM_speed);
+    coarseFilmControl->setSpeed(dcM_film_speed);
+    coarseFilmControl->run(FORWARD);
+    fineFilmControl->step(write_to_cam, FORWARD, MICROSTEP);
+    coarseFilmControl->setSpeed(0);    
+  }  
