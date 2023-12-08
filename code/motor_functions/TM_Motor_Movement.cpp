@@ -14,6 +14,7 @@ TM_Motor_Movement::TM_Motor_Movement(
     uint8_t eraser_control_pin,
     uint8_t eraser_actuation_min,
     uint8_t eraser_actuation_max,
+    uint8_t erase_all_distance,
     uint8_t eraser_speed,
     uint8_t stepper_total_steps,
     uint8_t stepper_move_steps,
@@ -51,6 +52,7 @@ TM_Motor_Movement::TM_Motor_Movement(
   eraserM_head_distance(eraser_head_distance),
   eraserM_distance(eraser_distance),
   eraserM_to_write_dist(eraser_to_write_dist),
+  erase_all_dist(erase_all_distance),
 
   draw_actuation_servoM_pin(draw_actuation_servo_pin),
   draw_control_servoM_pin(draw_control_servo_pin),
@@ -214,7 +216,35 @@ TM_Motor_Movement::TM_Motor_Movement(
     eraserToWrite();
 } 
 
-
+  void TM_Motor_Movement::eraseAll() {
+    eraserDown();
+    delay(500);
+    fineFilmControl->setSpeed(stepperM_speed);
+    coarseFilmControl->setSpeed(dcM_film_speed);
+    coarseFilmControl->run(FORWARD);
+    fineFilmControl->step(erase_all_dist, FORWARD, MICROSTEP);
+    coarseFilmControl->setSpeed(0);
+    delay(500);
+    fineFilmControl->setSpeed(stepperM_speed);
+    coarseFilmControl->setSpeed(dcM_film_speed);
+    coarseFilmControl->run(FORWARD);
+    fineFilmControl->step(erase_all_dist, BACKWARD, MICROSTEP);
+    coarseFilmControl->setSpeed(0);
+    delay(500);
+    fineFilmControl->setSpeed(stepperM_speed);
+    coarseFilmControl->setSpeed(dcM_film_speed);
+    coarseFilmControl->run(FORWARD);
+    fineFilmControl->step(erase_all_dist, BACKWARD, MICROSTEP);
+    coarseFilmControl->setSpeed(0);
+    delay(500);
+    fineFilmControl->setSpeed(stepperM_speed);
+    coarseFilmControl->setSpeed(dcM_film_speed);
+    coarseFilmControl->run(FORWARD);
+    fineFilmControl->step(erase_all_dist, FORWARD, MICROSTEP);
+    coarseFilmControl->setSpeed(0);
+    delay(500);
+    eraserUp();
+  }
 
   void TM_Motor_Movement::headPositiveVerticalLine() {
     for (int i = head_min; i <= head_max; i +=5) {
