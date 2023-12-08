@@ -49,7 +49,8 @@ class TM_Motor_Movement
     uint8_t bit_space,
     uint8_t eraser_head_distance,
     uint8_t eraser_distance,
-    uint8_t eraser_to_write_dist
+    uint8_t eraser_to_write_dist,
+    uint8_t write_to_camera
     );
     void begin();
     void moveFilmForward();
@@ -81,6 +82,7 @@ class TM_Motor_Movement
     void eraserToWrite();
     void drawAll();
     void goHome();
+    void goToCamera();
     
 
   private:
@@ -114,6 +116,7 @@ class TM_Motor_Movement
     uint8_t eraserM_to_write_dist;
     uint8_t eraserM_head_distance;
     uint8_t eraserM_distance;
+    uint8_t write_to_cam;
 
 };
 
