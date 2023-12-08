@@ -8,6 +8,7 @@ uint8_t eraser_control_pin = 4;
 uint8_t eraser_actuation_min = 0;
 uint8_t eraser_actuation_max = 130;
 uint8_t eraser_speed = 255;
+uint8_t erase_all_distance = 1000;
 uint8_t stepper_total_steps = 200;
 uint8_t stepper_move_steps = 4;
 uint8_t stepper_speed = 30;
@@ -34,6 +35,7 @@ TM_Motor_Movement TM(
   eraser_actuation_min,
   eraser_actuation_max,
   eraser_speed,
+  erase_all_distance,
   stepper_total_steps,
   stepper_move_steps,
   stepper_speed,

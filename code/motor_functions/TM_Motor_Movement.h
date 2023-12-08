@@ -35,6 +35,7 @@ class TM_Motor_Movement
     uint8_t eraser_actuation_min,
     uint8_t eraser_actuation_max,
     uint8_t eraser_speed,
+    uint8_t erase_all_distance,
     uint8_t stepper_total_steps,
     uint8_t stepper_move_steps,
     uint8_t stepper_speed,
@@ -83,6 +84,7 @@ class TM_Motor_Movement
     void drawAll();
     void goHome();
     void goToCamera();
+    void eraseAll();
     
 
   private:
@@ -100,6 +102,7 @@ class TM_Motor_Movement
     uint8_t eraser_controlM_pin;
     uint8_t eraser_actuationM_min;
     uint8_t eraser_actuationM_max;
+    uint8_t erase_all_dist;
     uint8_t stepperM_total_steps;
     uint8_t stepperM_move_steps;
     uint8_t stepperM_speed;
@@ -117,7 +120,6 @@ class TM_Motor_Movement
     uint8_t eraserM_head_distance;
     uint8_t eraserM_distance;
     uint8_t write_to_cam;
-
 };
 
 #endif
