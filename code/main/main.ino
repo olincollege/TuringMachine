@@ -40,8 +40,8 @@ booleanNot: #0#1, #110#001, #10#01, etc. (two strings u and v that consist of 0s
 //------------------------------------------------------------------------------//
 //------------------------------------------------------------------------------//
 // Provide the input operation and input string to perform on the Turing Machine
-String operation = "";
-String inputString = "";
+String operation = "anbn";
+String inputString = "01";
 //------------------------------------------------------------------------------//
 //------------------------------------------------------------------------------//
 
@@ -54,9 +54,10 @@ uint8_t film_dc_pin = 3;
 uint8_t stepper_pin = 1;
 uint8_t eraser_actuation_pin = 6;
 uint8_t eraser_control_pin = 4;
-uint8_t eraser_actuation_min = 45;
+uint8_t eraser_actuation_min = 0;
 uint8_t eraser_actuation_max = 130;
 uint8_t eraser_speed = 255;
+uint8_t erase_all_distance = 1000;
 uint8_t stepper_total_steps = 200;
 uint8_t stepper_move_steps = 4;
 uint8_t stepper_speed = 30;
@@ -72,6 +73,7 @@ uint8_t bit_space = 25;
 uint8_t eraser_head_distance = 150;
 uint8_t eraser_distance = 130;
 uint8_t eraser_to_write_dist = 49;
+uint8_t write_to_camera = 125;
 
 TM_Motor_Movement TM(
         bitstring,
@@ -82,6 +84,7 @@ TM_Motor_Movement TM(
         eraser_actuation_min,
         eraser_actuation_max,
         eraser_speed,
+        erase_all_distance,
         stepper_total_steps,
         stepper_move_steps,
         stepper_speed,
@@ -96,7 +99,8 @@ TM_Motor_Movement TM(
         bit_space,
         eraser_head_distance,
         eraser_distance,
-        eraser_to_write_dist
+        eraser_to_write_dist,
+        write_to_camera
 );
 
 /*==============================================================================*/
@@ -424,7 +428,8 @@ void setup() {
     // Draw the inputString
     TM.drawAll();
 
-    // TODO - Move to start of string (first symbol)
+    // Move start of string (first symbol) under camera
+    TM.goToCamera();
 
     // Obtain computation result using State Transition
     result = stateTransition(operation);
@@ -443,6 +448,9 @@ void setup() {
                  "Operation " + operation,
                  "String " + inputString,
                  "Result: " + resultMessage);
+
+    // Erase string on tape
+    TM.eraseAll();
 }
 
 void loop() {
