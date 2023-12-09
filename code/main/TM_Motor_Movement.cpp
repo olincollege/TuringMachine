@@ -14,6 +14,7 @@ TM_Motor_Movement::TM_Motor_Movement(
         uint8_t eraser_control_pin,
         uint8_t eraser_actuation_min,
         uint8_t eraser_actuation_max,
+        uint8_t erase_all_distance,
         uint8_t eraser_speed,
         uint8_t stepper_total_steps,
         uint8_t stepper_move_steps,
@@ -29,7 +30,8 @@ TM_Motor_Movement::TM_Motor_Movement(
         uint8_t bit_space,
         uint8_t eraser_head_distance,
         uint8_t eraser_distance,
-        uint8_t eraser_to_write_dist
+        uint8_t eraser_to_write_dist,
+        uint8_t write_to_camera
 ) :
 
         start_bitstring(bitstring),
@@ -50,6 +52,7 @@ TM_Motor_Movement::TM_Motor_Movement(
         eraserM_head_distance(eraser_head_distance),
         eraserM_distance(eraser_distance),
         eraserM_to_write_dist(eraser_to_write_dist),
+        erase_all_dist(erase_all_distance),
 
         draw_actuation_servoM_pin(draw_actuation_servo_pin),
         draw_control_servoM_pin(draw_control_servo_pin),
@@ -58,13 +61,14 @@ TM_Motor_Movement::TM_Motor_Movement(
         head_min(head_min_pos),
         head_max(head_max_pos),
         zero_lines_num(zero_lines),
-        bit_spacing(bit_space)
+        bit_spacing(bit_space),
+        write_to_cam(write_to_camera)
 {
 
 };
 
 void TM_Motor_Movement::begin() {
-    // Serial.begin(9600);
+    Serial.begin(9600);
     AFMS = Adafruit_MotorShield();
     // Serial.println("MotorShield Found!");
     fineFilmControl = AFMS.getStepper(stepperM_total_steps, stepperM_pin);
@@ -146,13 +150,21 @@ void TM_Motor_Movement::moveOneSymbolBackward() {
 }
 
 void TM_Motor_Movement::eraserDown() {
-    eraserActuation.write(eraser_actuationM_min);
+    //eraserActuation.write(eraser_actuationM_min);
     // Serial.println("Eraser Down!");
+    for (int i = eraser_actuationM_max; i >= eraser_actuationM_min; i -=5) {
+        eraserActuation.write(i);
+        delay(20);
+    }
 }
 
 void TM_Motor_Movement::eraserUp() {
-    eraserActuation.write(eraser_actuationM_max);
+    //eraserActuation.write(eraser_actuationM_max);
     // Serial.println("Eraser Up!");
+    for (int i = eraser_actuationM_min; i <= eraser_actuationM_max; i +=5) {
+        eraserActuation.write(i);
+        delay(20);
+    }
 }
 
 void TM_Motor_Movement::eraserOn() {
@@ -204,26 +216,54 @@ void TM_Motor_Movement::eraseOneSymbol() {
     eraserToWrite();
 }
 
-
+void TM_Motor_Movement::eraseAll() {
+    eraserDown();
+    delay(500);
+    fineFilmControl->setSpeed(stepperM_speed);
+    coarseFilmControl->setSpeed(dcM_film_speed);
+    coarseFilmControl->run(FORWARD);
+    fineFilmControl->step(erase_all_dist, FORWARD, MICROSTEP);
+    coarseFilmControl->setSpeed(0);
+    delay(500);
+    fineFilmControl->setSpeed(stepperM_speed);
+    coarseFilmControl->setSpeed(dcM_film_speed);
+    coarseFilmControl->run(BACKWARD);
+    fineFilmControl->step(erase_all_dist, BACKWARD, MICROSTEP);
+    coarseFilmControl->setSpeed(0);
+    delay(500);
+    fineFilmControl->setSpeed(stepperM_speed);
+    coarseFilmControl->setSpeed(dcM_film_speed);
+    coarseFilmControl->run(BACKWARD);
+    fineFilmControl->step(erase_all_dist, BACKWARD, MICROSTEP);
+    coarseFilmControl->setSpeed(0);
+    delay(500);
+    fineFilmControl->setSpeed(stepperM_speed);
+    coarseFilmControl->setSpeed(dcM_film_speed);
+    coarseFilmControl->run(FORWARD);
+    fineFilmControl->step(erase_all_dist, FORWARD, MICROSTEP);
+    coarseFilmControl->setSpeed(0);
+    delay(500);
+    eraserUp();
+}
 
 void TM_Motor_Movement::headPositiveVerticalLine() {
-    // for (int i = head_min; i <= head_max; i +=5) {
-    //   drawingControl.write(i);
-    //   delay(20);
-    // }
+    for (int i = head_min; i <= head_max; i +=5) {
+        drawingControl.write(i);
+        delay(20);
+    }
 
 
-    drawingControl.write(head_max);
+    //drawingControl.write(head_max);
     delay(500);
     // Serial.println("Positive Line!");
 }
 
 void TM_Motor_Movement::headNegativeVerticalLine() {
-    // for (int i = head_max; i >= head_min; i-=5) {
-    //   drawingControl.write(i);
-    //   delay(20);
-    // }
-    drawingControl.write(head_min);
+    for (int i = head_max; i >= head_min; i-=5) {
+        drawingControl.write(i);
+        delay(20);
+    }
+    //drawingControl.write(head_min);
     delay(500);
     // Serial.println("Negative Line!");
 }
@@ -232,20 +272,22 @@ void TM_Motor_Movement::headNegativeVerticalLine() {
 
 
 void TM_Motor_Movement::markerDown() {
-    // for (int i = marker_up_posi; i >= marker_down_posi; i -=3) {
-    //   drawingActuation.write(i);
-    //   delay(20);
-    // }
-    drawingActuation.write(marker_down_posi);
+    for (int i = marker_up_posi; i >= marker_down_posi; i -=3) {
+        drawingActuation.write(i);
+        delay(20);
+    }
+    delay(500);
+    //drawingActuation.write(marker_down_posi);
     // Serial.println("Marker Down!");
 }
 
 void TM_Motor_Movement::markerUp() {
-    // for (int i = marker_down_posi; i <= marker_up_posi; i +=3) {
-    //   drawingActuation.write(i);
-    //   delay(20);
-    // }
-    drawingActuation.write(marker_up_posi);
+    for (int i = marker_down_posi; i <= marker_up_posi; i +=3) {
+        drawingActuation.write(i);
+        delay(20);
+    }
+    delay(500);
+    //drawingActuation.write(marker_up_posi);
 
     // Serial.println("Marker Up!");
 }
@@ -381,20 +423,32 @@ void TM_Motor_Movement::drawAll() {
             // Serial.println("Drawing Zero!");
             drawZero();
             delay(500);
-            moveOneBitForward();
             delay(500);
         } else {
             // Serial.println("Drawing One!");
             drawOne();
             delay(500);
-            moveOneBitForward();
             delay(500);
         }
     }
 }
 
 void TM_Motor_Movement::goHome() {
-    for (int i = 0; i <= start_bitstring.length(); i++) {
+    int bit_space_count = 0;
+
+    for (int i = 0; i <= start_bitstring.length() - 1; i++) {
+        if (start_bitstring[i] == '0') {
+            bit_space_count += 5;
+            //Serial.println(bit_space_count);
+        } else {
+            bit_space_count += 4;
+            //Serial.println(bit_space_count);
+        }
+    }
+
+    //Serial.println(bit_space_count);
+
+    for (int i = 0; i <= bit_space_count - 1; i++) {
         fineFilmControl->setSpeed(stepperM_speed);
         coarseFilmControl->setSpeed(dcM_film_speed);
         coarseFilmControl->run(BACKWARD);
@@ -402,4 +456,13 @@ void TM_Motor_Movement::goHome() {
         coarseFilmControl->setSpeed(0);
         delay(500);
     }
+}
+void TM_Motor_Movement::goToCamera() {
+    goHome();
+    delay(2000);
+    fineFilmControl->setSpeed(stepperM_speed);
+    coarseFilmControl->setSpeed(dcM_film_speed);
+    coarseFilmControl->run(FORWARD);
+    fineFilmControl->step(write_to_cam, FORWARD, MICROSTEP);
+    coarseFilmControl->setSpeed(0);
 }
