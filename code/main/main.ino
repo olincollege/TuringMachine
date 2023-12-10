@@ -1,5 +1,5 @@
 /*
-=========================================================================================================
+=================================================================================================================
 
 Main script for the Turing Machine
 
@@ -8,23 +8,24 @@ Learn more at: https://olincollege.github.io/pie-2023-03/turing-machine/
 Developed by Sparsh Gupta, Mark Belanger, Noah Rand, Will Young, and Joe Leedy
 at Olin College of Engineering, 2023.
 
-=========================================================================================================
+=================================================================================================================
 
 List of operations currently supported:
 
 - anbn (check whether a string has an equal number of 0s and 1s)
 - palindrome (check whether a string of 0s and 1s is a palindrome)
-- booleanNot (check whether a string is the boolean not/complement of another string)
-
-=========================================================================================================
+- booleanNot (check whether a string is the boolean NOT/complement of another string)
+- booleanOr (check whether a string is the boolean OR output of two other strings)
+=================================================================================================================
 
 Sample string input formats or languages accepted by the Turing Machine for operations:
 
 anbn: 00, 1010, 0101, etc. (any string of even length that consists of 0s and 1s)
 palindrome: 010, 1001, 111, etc. (any string that consists of 0s and 1s)
 booleanNot: #0#1, #110#001, #10#01, etc. (two strings u and v that consist of 0s and 1s in the form #u#v)
+booleanOr: #0#1#1, "#101#010#111", etc. (three strings u, v, and w that consist of 0s and 1s in the form #u#v#w)
 
-=========================================================================================================
+================================================================================================================
 */
 
 // Imports
@@ -36,6 +37,7 @@ booleanNot: #0#1, #110#001, #10#01, etc. (two strings u and v that consist of 0s
 #include "anbn.h"
 #include "palindrome.h"
 #include "boolean_not.h"
+#include "boolean_or.h"
 
 //------------------------------------------------------------------------------//
 //------------------------------------------------------------------------------//
@@ -196,7 +198,7 @@ char stateTransition_anbn() {
     anbn_input.symbol = readSymbol();
 
     displayOnLCD("Turing Machine",
-                 "",
+                 "Operation: " + operation,
                  "State: " + anbn_input.state,
                  "Symbol: " + anbn_input.symbol);
 
@@ -220,7 +222,7 @@ char stateTransition_anbn() {
             // Draw output symbol
             drawSymbol(anbn_output.symbol);
 
-            // Move pointer based on anbn_output
+            // Move pointer based on output
             if (anbn_output.move_pointer == 1) {
                 TM.moveOneSymbolForward();
             } else {
@@ -228,7 +230,7 @@ char stateTransition_anbn() {
             }
         }
         else {
-            // Just move pointer based on anbn_output
+            // Just move pointer based on output
             if (anbn_output.move_pointer == 1) {
                 TM.moveOneSymbolForward();
             } else {
@@ -241,7 +243,7 @@ char stateTransition_anbn() {
         anbn_input.symbol = readSymbol();
 
         displayOnLCD("Turing Machine",
-                     "",
+                     "Operation: " + operation,
                      "State: " + anbn_input.state,
                      "Symbol: " + anbn_input.symbol);
     }
@@ -261,7 +263,7 @@ char stateTransition_palindrome() {
     palindrome_input.symbol = readSymbol();
 
     displayOnLCD("Turing Machine",
-                 "",
+                 "Operation: " + operation,
                  "State: " + palindrome_input.state,
                  "Symbol: " + palindrome_input.symbol);
 
@@ -285,7 +287,7 @@ char stateTransition_palindrome() {
             // Draw output symbol
             drawSymbol(palindrome_output.symbol);
 
-            // Move pointer based on anbn_output
+            // Move pointer based on output
             if (palindrome_output.move_pointer == 1) {
                 TM.moveOneSymbolForward();
             } else {
@@ -293,7 +295,7 @@ char stateTransition_palindrome() {
             }
         }
         else {
-            // Just move pointer based on anbn_output
+            // Just move pointer based on output
             if (palindrome_output.move_pointer == 1) {
                 TM.moveOneSymbolForward();
             } else {
@@ -306,7 +308,7 @@ char stateTransition_palindrome() {
         palindrome_input.symbol = readSymbol();
 
         displayOnLCD("Turing Machine",
-                     "",
+                     "Operation: " + operation,
                      "State: " + palindrome_input.state,
                      "Symbol: " + palindrome_input.symbol);
     }
@@ -326,7 +328,7 @@ char stateTransition_booleanNot() {
     booleanNot_input.symbol = readSymbol();
 
     displayOnLCD("Turing Machine",
-                 "",
+                 "Operation: " + operation,
                  "State: " + booleanNot_input.state,
                  "Symbol: " + booleanNot_input.symbol);
 
@@ -350,7 +352,7 @@ char stateTransition_booleanNot() {
             // Draw output symbol
             drawSymbol(booleanNot_output.symbol);
 
-            // Move pointer based on anbn_output
+            // Move pointer based on output
             if (booleanNot_output.move_pointer == 1) {
                 TM.moveOneSymbolForward();
             } else {
@@ -358,7 +360,7 @@ char stateTransition_booleanNot() {
             }
         }
         else {
-            // Just move pointer based on anbn_output
+            // Just move pointer based on output
             if (booleanNot_output.move_pointer == 1) {
                 TM.moveOneSymbolForward();
             } else {
@@ -371,13 +373,81 @@ char stateTransition_booleanNot() {
         booleanNot_input.symbol = readSymbol();
 
         displayOnLCD("Turing Machine",
-                     "",
+                     "Operation: " + operation,
                      "State: " + booleanNot_input.state,
                      "Symbol: " + booleanNot_input.symbol);
     }
 }
 
 
+// ---------------------------
+// booleanOr state transition
+// ---------------------------
+char stateTransition_booleanOr() {
+
+    // Defining input and output
+    TM_transition_input booleanOr_input;
+    TM_transition_output booleanOr_output;
+
+    // Initialize start state and read initial symbol
+    booleanOr_input.state = 1;
+    booleanOr_input.symbol = readSymbol();
+
+    displayOnLCD("Turing Machine",
+                 "Operation: " + operation,
+                 "State: " + booleanOr_input.state,
+                 "Symbol: " + booleanOr_input.symbol);
+
+    while (booleanOr_input.state < 100) {
+        // Obtain one transition output
+        booleanOr_output = booleanOr(booleanOr_input);
+
+        // Halting state: Accept or Reject
+        if (booleanOr_output.state == 77) {
+            return 'A';
+        } else if (booleanOr_output.state == 66) {
+            return 'R';
+        }
+
+        // Write new symbol or skip drawing if same symbol
+        if (booleanOr_input.symbol != booleanOr_output.symbol) {
+
+            // Erase input symbol first
+            TM.eraseOneSymbol();
+
+            // Draw output symbol
+            drawSymbol(booleanOr_output.symbol);
+
+            // Move pointer based on output
+            if (booleanOr_output.move_pointer == 1) {
+                TM.moveOneSymbolForward();
+            } else {
+                TM.moveOneSymbolBackward();
+            }
+        }
+        else {
+            // Just move pointer based on output
+            if (booleanOr_output.move_pointer == 1) {
+                TM.moveOneSymbolForward();
+            } else {
+                TM.moveOneSymbolBackward();
+            }
+        }
+
+        // Next state and symbol
+        booleanOr_input.state = booleanOr_output.state;
+        booleanOr_input.symbol = readSymbol();
+
+        displayOnLCD("Turing Machine",
+                     "Operation: " + operation,
+                     "State: " + booleanOr_input.state,
+                     "Symbol: " + booleanOr_input.symbol);
+    }
+}
+
+// ---------------------------------------------------------------
+// Operation state transition
+// ---------------------------------------------------------------
 char stateTransitionResult; // To return the result of computation
 // Select stateTransition TM based on operation
 char stateTransition(const String& operation) {
@@ -393,9 +463,13 @@ char stateTransition(const String& operation) {
         stateTransitionResult = stateTransition_booleanNot();
         return stateTransitionResult;
     }
+    else if (operation == "booleanOr") {
+        stateTransitionResult = stateTransition_booleanOr();
+        return stateTransitionResult;
+    }
     // TODO - add other operations
     else {
-        return 'R';
+        return 'Error';
     }
 }
 
