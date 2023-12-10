@@ -25,7 +25,7 @@ List of operations currently supported:
 
 Sample string input formats or languages accepted by the Turing Machine for operations:
 
-**anbn**: 00, 1010, 0100, etc. (any string of even length that consists of 0s and 1s)
+**anbn**: 00, 1010, 0110, etc. (any string of even length that consists of 0s and 1s)
 
 **palindrome**: 010, 1001, 111, etc. (any string that consists of 0s and 1s)
 
