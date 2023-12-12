@@ -6,7 +6,7 @@ uint8_t stepper_pin = 1;
 uint8_t eraser_actuation_pin = 6;
 uint8_t eraser_control_pin = 4;
 uint8_t eraser_actuation_min = 0;
-uint8_t eraser_actuation_max = 130;
+uint8_t eraser_actuation_max = 180;
 uint8_t eraser_speed = 255;
 uint8_t erase_all_distance = 1000;
 uint8_t stepper_total_steps = 200;
@@ -58,18 +58,18 @@ void setup() {
 //   // put your setup code here, to run once:
   TM.begin();
   delay(2000);
-  //TM.drawAll();
+  // TM.drawAll();
   // delay(2000);
   // TM.goToCamera();
   //TM.eraseOneSymbol();
   // TM.eraserToWrite();
-  TM.eraserOn();
+  //TM.eraserOn();
 }
 
 void loop() {
-//   TM.eraserUp();
-//   delay(2000);
-//   TM.eraserDown();
-//   delay(2000);
+  TM.eraserUp();
+  delay(2000);
+  TM.eraserDown();
+  delay(2000);
 
 }
