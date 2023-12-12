@@ -58,14 +58,18 @@ void setup() {
 //   // put your setup code here, to run once:
   TM.begin();
   delay(2000);
-  // TM.drawAll();
+  //TM.drawAll();
   // delay(2000);
   // TM.goToCamera();
+  //TM.eraseOneSymbol();
+  // TM.eraserToWrite();
+  TM.eraserOn();
 }
 
 void loop() {
-  TM.eraserUp();
-  delay(2000);
-  TM.eraserDown();
-  delay(2000);
+//   TM.eraserUp();
+//   delay(2000);
+//   TM.eraserDown();
+//   delay(2000);
+
 }
