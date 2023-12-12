@@ -66,29 +66,29 @@ TM_Motor_Movement::TM_Motor_Movement(
   };
 
   void TM_Motor_Movement::begin() {
-    Serial.begin(9600);
+    //Serial.begin(9600);
     AFMS = Adafruit_MotorShield();
-    Serial.println("MotorShield Found!");
+    //Serial.println("MotorShield Found!");
     fineFilmControl = AFMS.getStepper(stepperM_total_steps, stepperM_pin);
-    Serial.println("Stepper Found!");
+    //Serial.println("Stepper Found!");
     coarseFilmControl = AFMS.getMotor(film_dcM_pin);
-    Serial.println("DC Motors Found!");
+    //Serial.println("DC Motors Found!");
     eraserControl = AFMS.getMotor(eraser_controlM_pin);
-    Serial.println("Eraser Found!");
+    //Serial.println("Eraser Found!");
     eraserActuation.attach(eraser_actuationM_pin);
     eraserActuation.write(eraser_actuationM_max);
     delay(300);
-    Serial.println("Eraser acuation home!");
+    //Serial.println("Eraser acuation home!");
     drawingActuation.attach(draw_actuation_servoM_pin);
     drawingActuation.write(marker_up_posi);
     delay(300);
-    Serial.println("Drawing acuation home!");
+    //Serial.println("Drawing acuation home!");
     drawingControl.attach(draw_control_servoM_pin);
     drawingControl.write(head_min);
     delay(300);
-    Serial.println("Drawing control home!");
+    //Serial.println("Drawing control home!");
     AFMS.begin();
-    Serial.println("Initiation Successful!");
+    //Serial.println("Initiation Successful!");
   }
 
   void TM_Motor_Movement::moveFilmForward() {
@@ -164,21 +164,23 @@ TM_Motor_Movement::TM_Motor_Movement(
 
     //eraserActuation.write(eraser_actuationM_min);
     // Serial.println("Eraser Down!");
-    for (int i = eraser_actuationM_max; i <= eraser_actuationM_min; i +=5) {
+    for (int i = eraser_actuationM_min; i <= eraser_actuationM_max; i +=3) {
       eraserActuation.write(i);
       delay(20);
-    }        
+    } 
+    //Serial.println("Eraser Down!");       
   }
 
   void TM_Motor_Movement::eraserUp() {
     // Method to raise the eraser up off the fiml
 
     //eraserActuation.write(eraser_actuationM_max);
-    // Serial.println("Eraser Up!");
-    for (int i = eraser_actuationM_min; i >= eraser_actuationM_max; i -=5) {
+    for (int i = eraser_actuationM_max; i >= eraser_actuationM_min; i -=3) {
       eraserActuation.write(i);
       delay(20);
     }    
+    //Serial.println("Eraser Up!");
+
   }
 
   void TM_Motor_Movement::eraserOn() {
@@ -287,7 +289,7 @@ TM_Motor_Movement::TM_Motor_Movement(
     // Method to move the writign head perpendicular to the
     // films travel and away from the writing heads start position
 
-    for (int i = head_min; i <= head_max; i +=5) {
+    for (int i = head_min; i <= head_max; i +=3) {
       drawingControl.write(i);
       delay(20);
     }
@@ -302,7 +304,7 @@ TM_Motor_Movement::TM_Motor_Movement(
     // Method to move the writign head perpendicular to the
     // films travel and toward from the writing heads start position
 
-    for (int i = head_max; i >= head_min; i-=5) {
+    for (int i = head_max; i >= head_min; i-=3) {
       drawingControl.write(i);
       delay(20);
     }
