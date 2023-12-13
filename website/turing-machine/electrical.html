@@ -63,7 +63,7 @@
 						<section id="one" class="spotlights">
 							<section>
 								<a href="" class="image">
-									<img src="images/Electrical_Block_Diagram.png" alt="" data-position="center center" style="width: 650px"/>
+									<img src="images/Electrical_Block_Diagram.png" alt="" data-position="center center" style="width: 620px"/>
 								</a>
 								<div class="content">
 									<div class="inner">
@@ -147,12 +147,11 @@
 											powered by an AdaFruit Motor Shield v2.
 										</p>
 										<p>A Nema 17 bipolar stepper motor controls the fine movement of the tape.
-											This stepper has 1.8 degree steps intervals and a total of 200 steps.
-											The machine takes advantage of the small step intervals to move the tape
-											small amounts for smoother writing.This motor is controlled and powered by
-											an AdaFruit Motor Shield v2.
+											This stepper has 1.8-degree step intervals and a total of 200 steps.
+											The machine takes advantage of the small step intervals to move the
+											tape in small amounts for smoother writing. This motor is controlled
+											and powered by an AdaFruit Motor Shield v2.
 										</p>
-
 									</div>
 								</div>
 							</section>
@@ -165,10 +164,15 @@
 										<header class="major">
 											<h3>Write Head</h3>
 										</header>
-										<p></p>
-										<ul class="actions">
-											<li><a href="generic.html" class="button">Learn more</a></li>
-										</ul>
+										<p>Servos control the vertical and horizontal motion of the marker.
+											One actuates the use of the marker by lifting it up and down while the
+											second servo moves the marker across the tape. This setup is optimized
+											for drawing straight lines that are either directly parallel or perpendicular to the tape.</p>
+										<p>Actuating the tape is used for drawing symbols in coordination with the servos on the writing head.
+											Lines parallel to the tape are created by actuating the marker downward and then
+											moving the tape backward for forward motion. This utilized the fine movement of the
+											tape actuation system.
+										</p>
 									</div>
 								</div>
 							</section>
@@ -181,10 +185,17 @@
 										<header class="major">
 											<h3>Erase Head</h3>
 										</header>
-										<p></p>
-										<ul class="actions">
-											<li><a href="generic.html" class="button">Learn more</a></li>
-										</ul>
+										<p>The eraser head is actuated using a servo. In the un-actuated position, the
+											eraser head is held above the tape by using the servos, and then when erasing
+											needs to start, the servos lowers the eraser head down to touch the tape.
+										</p>
+										<p>Once the eraser head has been actuated and is touching the tape, a DC motor
+											starts spinning the eraser so that there is more surface to erase any symbols.
+										</p>
+										<p>Once the eraser head is actuated and the eraser is spinning, the tape is moved
+											across the eraser to erase any symbols on the tape. Using the tape actuation
+											system allows for fine control of what parts of the tape come into contact with the eraser.
+										</p>
 									</div>
 								</div>
 							</section>
