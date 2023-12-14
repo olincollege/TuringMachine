@@ -42,8 +42,8 @@ booleanOr: #0#1#1, "#101#010#111", etc. (three strings u, v, and w that consist 
 //------------------------------------------------------------------------------//
 //------------------------------------------------------------------------------//
 // Provide the input operation and input string to perform on the Turing Machine
-String operation = "anbn";
-String inputString = "01";
+String operation = "booleanOr";
+String inputString = "#0#1#1";
 //------------------------------------------------------------------------------//
 //------------------------------------------------------------------------------//
 
@@ -63,7 +63,7 @@ uint8_t erase_all_distance = 1000;
 uint8_t stepper_total_steps = 200;
 uint8_t stepper_move_steps = 4;
 uint8_t stepper_speed = 30;
-uint8_t dc_film_speed = 120;
+uint8_t dc_film_speed = 180;
 uint8_t draw_actuation_servo_pin = 10;
 uint8_t draw_control_servo_pin = 9;
 uint8_t marker_up_pos = 180;
@@ -117,9 +117,9 @@ void displayOnLCD(String line1, String line2, String line3, String line4) {
     lcd.print(line1);
     lcd.setCursor(0, 1);
     lcd.print(line2);
-    lcd.setCursor(0, 2);
-    lcd.print(line3);
     lcd.setCursor(0, 3);
+    lcd.print(line3);
+    lcd.setCursor(10, 3);
     lcd.print(line4);
 }
 
@@ -167,6 +167,9 @@ char readSymbol() {
     }
 
     return symbol;
+
+    lcd.setCursor(0,3);     
+    lcd.print("Symbol: " + symbol);
 }
 
 /*==============================================================================*/
@@ -197,10 +200,14 @@ char stateTransition_anbn() {
     anbn_input.state = 1;
     anbn_input.symbol = readSymbol();
 
-    displayOnLCD("Turing Machine",
-                 "Operation: " + operation,
-                 "State: " + anbn_input.state,
-                 "Symbol: " + anbn_input.symbol);
+    lcd.setCursor(0,0);
+    lcd.print("Operation: " + operation); 
+    lcd.setCursor(0,1);     
+     
+    lcd.setCursor(0,3);     
+    lcd.print("State: " + anbn_input.state);  
+    lcd.setCursor(10,3);     
+    lcd.print("Symbol: " + anbn_input.symbol); 
 
     while (anbn_input.state < 100) {
         // Obtain one transition output
@@ -242,10 +249,7 @@ char stateTransition_anbn() {
         anbn_input.state = anbn_output.state;
         anbn_input.symbol = readSymbol();
 
-        displayOnLCD("Turing Machine",
-                     "Operation: " + operation,
-                     "State: " + anbn_input.state,
-                     "Symbol: " + anbn_input.symbol);
+        
     }
 }
 
@@ -478,53 +482,68 @@ char stateTransition(const String& operation) {
 // Arduino
 /*==============================================================================*/
 
+
+
 // To store the output of TM computation
 char result;
 
 // Arduino
 void setup() {
+    // State transition Switch
+    pinMode(2, INPUT_PULLUP);
+    pinMode(13, OUTPUT);
+
+    int sensorVal = digitalRead(2);
+
     // LCD
     lcd.init(); 
     lcd.backlight(); 
     lcd.setCursor(0,0);
-    lcd.print("Turing Machine");
-    lcd.setCursor(0,1);     
-    lcd.print("Operation " + operation);  
-    lcd.setCursor(0,2);     
-    lcd.print("String " + inputString);  
-    lcd.setCursor(0,3);     
-    lcd.print("Computing..."); 
+    lcd.print("Turing Machine"); 
+    lcd.setCursor(0,1); 
+    lcd.print("Op: " + operation); 
+    lcd.setCursor(0,2);    
+    lcd.print("String: " + inputString);   
+    lcd.setCursor(0,3);      
+    lcd.print("Computing...");
 
-    // Setup motor functions
-    TM.begin();
-    delay(10000);
 
-    // Draw the inputString
-    TM.drawAll();
+    if (sensorVal == HIGH) {
+      // Setup motor functions
+      TM.begin();
 
-    // Move start of string (first symbol) under camera
-    TM.goToCamera();
+      // Draw the inputString
+      TM.drawAll();
 
-    // Obtain computation result using State Transition
-    result = stateTransition(operation);
+      // Move start of string (first symbol) under camera
+      TM.goToCamera();
 
-    // Display final result on LCD
-    String resultMessage;
-    if (result == 'A') {
-        resultMessage = "Accept";
-    } else if (result == 'R') {
-        resultMessage = "Reject";
-    } else {
-        resultMessage = "Error!";
+      // Obtain computation result using State Transition
+      result = stateTransition(operation);
+
+      // Display final result on LCD
+      String resultMessage;
+      if (result == 'A') {
+          resultMessage = "Accept";
+      } else if (result == 'R') {
+          resultMessage = "Reject";
+      } else {
+          resultMessage = "Error!";
+      }
+
+      lcd.clear();
+      lcd.setCursor(0,0);
+      lcd.print("Turing Machine"); 
+      lcd.setCursor(0,1); 
+      lcd.print("Op: " + operation); 
+      lcd.setCursor(0,2);    
+      lcd.print("String: " + inputString);   
+      lcd.setCursor(0,3);      
+      lcd.print("Result:" + resultMessage);
+
+      // Erase string on tape
+      TM.eraseAll();
     }
-
-    displayOnLCD("Turing Machine",
-                 "Operation " + operation,
-                 "String " + inputString,
-                 "Result: " + resultMessage);
-
-    // Erase string on tape
-    TM.eraseAll();
 }
 
 void loop() {
