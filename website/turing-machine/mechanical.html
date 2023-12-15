@@ -62,85 +62,122 @@
 						<!-- One -->
 						<section id="one" class="spotlights">
 							<section>
-								<a href="template/generic.html" class="image">
-									<img src="images/pic08.jpg" alt="" data-position="center center" />
+								<a href="" class="image">
+									<img src="./images/full_assembly_render.png" alt="" data-position="center center" style="width: 570px"/>
 								</a>
 								<div class="content">
 									<div class="inner">
 										<header class="major">
 											<h3>CAD/Design</h3>
 										</header>
-										<p></p>
-										<ul class="actions">
-											<li><a href="template/generic.html" class="button">Learn more</a></li>
-										</ul>
+										<p>Throughout the project, we had a strong focus on creating and maintaining
+											high-quality CAD for the Turing Machine. To do this, we implemented CAD
+											standards at the beginning of the semester, such as: designing parametrically,
+											using configurations whenever possible, file naming standards, and iteration/file
+											management practices. We also utilized GitHub to share CAD. By maintaining an
+											emphasis on these standards, we were able to manufacture many parts, if not
+											perfectly, good enough to be functional on the first try. This greatly streamlined
+											our design process and improved the overall quality of our assembly. </p>
 									</div>
 								</div>
 							</section>
 							<section>
 								<a href="" class="image">
-									<img src="/images/write_head_render.png" alt="" data-position="top center" />
+									<img src="./images/write_head_render.png" alt="" data-position="top center" />
 								</a>
 								<div class="content">
 									<div class="inner">
 										<header class="major">
 											<h3>Write Head</h3>
 										</header>
-										<p></p>
+										<p>The write head is one of our Turing Machine’s central systems. It is
+											essentially a two-axis gantry, controlled by servo motors, that is responsible
+											for writing symbols, primarily bits (so ones and zeros on the tape).
+											Combined with the tape actuator, the write head essentially forms a mini
+											three-axis gantry capable of writing any symbol. </p>
 									</div>
 								</div>
 							</section>
 							<section>
-								<a href="generic.html" class="image">
-									<img src="/images/pic09.jpg" alt="" data-position="top center" />
+								<a href="" class="image">
+									<img src="./images/base_render.png" alt="" data-position="top center" style="width: 600px" />
+								</a>
+								<div class="content">
+									<div class="inner">
+										<header class="major">
+											<h3>Box</h3>
+										</header>
+										<p>The heart of our Turing machine is the acrylic and Delrin box that houses our
+											Arduino, drive shafts, stepper motor, and tape actuation system. In order to
+											optimize for a low budget, acrylic was chosen for all sides of the box except
+											for the top because the top was the only face requiring post-processing
+											following laser cutting. Using Delrin for the top allowed us to tap holes,
+											making the assembly process much smoother. The box is mounted to a
+											CNC-milled plywood base plate with precise locating features for the box,
+											tape runner, and tape spools.</p>
+									</div>
+								</div>
+							</section>
+							<section>
+								<a href="" class="image">
+									<img src="images/erasehead_render.png" alt="" data-position="top center" style="width: 600px" />
 								</a>
 								<div class="content">
 									<div class="inner">
 										<header class="major">
 											<h3>Erase Head</h3>
 										</header>
-										<p></p>
-										<ul class="actions">
-											<li><a href="generic.html" class="button">Learn more</a></li>
-										</ul>
+										<p>The erase head is another important component of the Turing machine, and
+											it is responsible for erasing symbols drawn by the write head in order to
+											write new bit-strings. The erase head consists of three major components:
+											a rotating felt wheel powered by a DC motor, which is what makes contact
+											with the ink, allowing it to be erased, a pivoting arm that supports the
+											motor/wheel; and a servo with a CAM designed to actuate the head on the
+											swivel to/away from the film.  </p>
 									</div>
 								</div>
 							</section>
 							<section>
-								<a href="generic.html" class="image">
-									<img src="/images/pic09.jpg" alt="" data-position="top center" />
+								<a href="" class="image">
+									<img src="./images/spool_render.png" alt="" data-position="top center" style="width: 550px"/>
 								</a>
 								<div class="content">
 									<div class="inner">
 										<header class="major">
 											<h3>Tape Actuation</h3>
 										</header>
-										<p></p>
-										<ul class="actions">
-											<li><a href="generic.html" class="button">Learn more</a></li>
-										</ul>
+										<p>Tape actuation is arguably our Turing Machine’s most important system and
+											was the first we designed. Without tape actuation, being able to write,
+											read, or erase symbols is essentially useless. The tape actuation is what
+											moves the plastic film leader along the track to/from the read, write, and
+											erase stations. It also provides another axis of movement for the write head.
+											The tape is actuated by a geared-down stepper motor. It is geared in such a
+											way that 1 rotation of the shaft roughly corresponds to 1 symbol width.
+											We also designed special sprockets in order to precisely fit and actuate
+											our film. Finally, there are two Delrin plates positioned above the film
+											to help maintain its tension and position relative to the sprockets.</p>
 									</div>
 								</div>
 							</section>
 							<section>
-								<a href="generic.html" class="image">
-									<img src="/images/pic09.jpg" alt="" data-position="top center" />
+								<a href="" class="image">
+									<img src="./images/film.jpg" alt="" data-position="top center" style="width: 550px"/>
 								</a>
 								<div class="content">
 									<div class="inner">
 										<header class="major">
 											<h3>Physical Film</h3>
 										</header>
-										<p></p>
-										<ul class="actions">
-											<li><a href="generic.html" class="button">Learn more</a></li>
-										</ul>
+										<p>For the film itself, we used a 35mm mylar film leader. We chose this because
+											it has prebuilt groves designed for sprockets to aid in retention and
+											actuation, dry-erase markers erase well from it and is reasonably priced.
+											Also, the machine we were inspired by used a similar film leader. </p>
 									</div>
 								</div>
 							</section>
 							<section>
-								<a href="generic.html" class="image">
-									<img src="/images/pic09.jpg" alt="" data-position="top center" />
+								<a href="" class="image">
+									<img src="./images/camera_mount_render.png" alt="" data-position="top center" style="width: 650px"/>
 								</a>
 								<div class="content">
 									<div class="inner">
@@ -153,26 +190,6 @@
 											that can be swapped to change camera height, and a simple sheet metal shroud
 											to prevent glare and improve consistency of bit-string recognition.
 										</p>
-									</div>
-								</div>
-							</section>
-							<section>
-								<a href="" class="image">
-									<img src="/images/base_render.png" alt="" data-position="top center" style="width: 800px" />
-								</a>
-								<div class="content">
-									<div class="inner">
-										<header class="major">
-											<h3>Box</h3>
-										</header>
-										<p>The heart of our turing machine is the acrylic and Delrin box that houses our
-											arduino, drive shafts, stepper motor, and tape actuation system.
-											In order to optimize for a low budget, acrylic was chosen for all sides
-											of the box save for the top because the top was the only face requiring
-											post-processing following laser cutting. Using Delrin for the top allowed
-											us to tap holes, making the assembly process much smoother. The box is
-											mounted to a CNC-milled plywood base plate with precise locating features
-											for the box, tape runner, and tape spools.</p>
 									</div>
 								</div>
 							</section>
