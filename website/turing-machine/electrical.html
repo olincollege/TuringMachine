@@ -7,6 +7,7 @@
 -->
 <html>
 	<head>
+		<link rel="icon" href="./images/favicon.ico" type="image/x-icon">
 		<title>Electrical - Turing Machine</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
@@ -32,6 +33,7 @@
 						<ul class="links">
 							<li><a href="index.html">Home</a></li>
 							<li><a href="about.html">About</a></li>
+							<li><a href="journey.html">Our Journey</a></li>
 							<li><a href="demo.html">Demonstration</a></li>
 							<li><a href="mechanical.html">Mechanical</a></li>
 							<li><a href="electrical.html">Electrical</a></li>
@@ -70,7 +72,20 @@
 										<header class="major">
 											<h3>Electrical Diagram</h3>
 										</header>
-										<p>A high-level block diagram of the electrical system.</p>
+										<p>This diagram gives an overview of how the various electrical components are
+											connected within the machine. Major components include the Arduino UNO R3,
+											the Adafruit Motor Shield v2 and the computer. All the actuators
+											(motors, servos, stepper) are connected to the Motor Shield and interface
+											with the Arduino UNO so that they can be controlled. The computer is
+											connected to both the ESP32 and the Arduino UNO so that new sketches can be
+											easily uploaded and to allow for serial communication between the two microcontrollers.</p>
+
+										<p>Two power supplies are used, both 5V. One is used to power the Arduino and the
+											DC and stepper motors while the second is used to power the servos and LCD panel.
+											We chose to do this because servos connected to the Motor Shield are powered through
+											the Arduino’s onboard power supply and powering three servos and/or the LCD panel
+											off of it would overwhelm it and lead to unexpected restarts.
+										</p>
 									</div>
 								</div>
 							</section>
@@ -114,7 +129,7 @@
 							</section>
 							<section>
 								<a href="" class="image">
-									<img src="./images/motorshield.jpg" alt="" data-position="top center" />
+									<img src="./images/motorshield.jpg" alt="" data-position="top center" style="width: 800px" />
 								</a>
 								<div class="content">
 									<div class="inner">
@@ -129,6 +144,21 @@
 										<ul class="actions">
 											<li><a href="https://cdn-learn.adafruit.com/downloads/pdf/adafruit-motor-shield-v2-for-arduino.pdf" class="button">Learn more about the Motor Shield</a></li>
 										</ul>
+									</div>
+								</div>
+							</section>
+							<section>
+								<a href="" class="image">
+									<img src="./images/Simplified_Motorshield_Wiring.png" alt="" data-position="top center" />
+								</a>
+								<div class="content">
+									<div class="inner">
+										<header class="major">
+											<h3>Motor Shield Wiring</h3>
+										</header>
+										<p>This schematic is a wiring-level representation of how motors and components
+											are wired to the motor shield.
+										</p>
 									</div>
 								</div>
 							</section>
