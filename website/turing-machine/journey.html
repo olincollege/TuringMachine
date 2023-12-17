@@ -1,0 +1,158 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<link rel="icon" href="./images/favicon.ico" type="image/x-icon">
+		<title>Our Journey - Turing Machine</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<a href="index.html" class="logo"><strong>Olin College - PIE</strong> <span>Turing Machine</span></a>
+						<nav>
+							<a href="#menu">Menu</a>
+						</nav>
+					</header>
+
+				<!-- Menu -->
+					<nav id="menu">
+						<ul class="links">
+							<li><a href="index.html">Home</a></li>
+							<li><a href="about.html">About</a></li>
+							<li><a href="journey.html">Our Journey</a></li>
+							<li><a href="demo.html">Demonstration</a></li>
+							<li><a href="mechanical.html">Mechanical</a></li>
+							<li><a href="electrical.html">Electrical</a></li>
+							<li><a href="software.html">Software</a></li>
+							<li><a href="bom.html">Bill of Materials</a></li>
+						</ul>
+					</nav>
+
+				<!-- Main -->
+					<div id="main" class="alt">
+
+						<!-- One -->
+							<section id="one">
+								<div class="inner">
+									<header class="major">
+										<h1>How did we plan it out?</h1>
+									</header>
+									<p>To complete our Turing machine, we started by breaking our final deliverable goal
+										into bite-sized, iterative chunks, such as designing the write head, devising a
+										model for image recognition, choosing actuators, or fabricating components.
+										From there, we composed those sub-goals into groups by importance and scope,
+										which we called sprint goals. As the project lasted approximately 6 weeks,
+										we made 3 sprints of 2 weeks each. Within each sprint, we divided tasks amongst
+										ourselves, assigning deadlines and rating them based on priority. Using this
+										system, we were able to remain more or less on track with our goals for the
+										duration of the project. </p>
+									<p>Our process in detail is described below based on how we progressed through the sprints.</p>
+								</div>
+							</section>
+
+						<!-- Two -->
+							<section id="two">
+								<div class="inner">
+									<header class="major">
+										<h1>Sprint 1</h1>
+									</header>
+									<p></p>
+									<p>In the first sprint, our focus was primarily on creating a functional mechanism
+										for tape actuation and getting started with symbol recognition. Mechanically,
+										this entailed designing and fabricating the tape actuator and the Turing Machine’s
+										main box/frame, a way to manage slack in the tape, and fabricating a camera mount.
+										With electrical and software, aside from a brief stint of wiring and controlling
+										DC motor Stepper motors, most of the sprint was surrounded by troubleshooting the
+										ESP-32 camera. This was our biggest challenge during the sprint: we faced a myriad
+										of challenges surrounding this camera, primarily because it had a bunch of issues
+										in initializing and transferring serial data to a computer connected to it.
+									</p>
+
+									<span class="image fit"><img src="images/prototype1.png" alt="Prototype 1"/></span>
+								</div>
+							</section>
+
+						<!-- Three -->
+							<section id="three">
+								<div class="inner">
+									<header class="major">
+										<h1>Sprint 2</h1>
+									</header>
+									<p>In sprint two, our primary goal was to be able to read and write characters.
+										To do this, we needed to make symbol recognition functional, improve our tape
+										actuation and management, and design/fabricate the write head. We, for the most part,
+										accomplished our goals. Overall, we were unable to accomplish symbol recognition
+										fully due to the ESP 32’s limited capability and lighting issues. However,
+										we learned a lot about the camera, which prepared us to make a major breakthrough
+										in the next sprint. Additionally, our tape storage and actuation were significantly
+										improved, and we fabricated a functional write head. We also designed and fabricated
+										an erase head. However, during testing, we discovered actuation issues and needed
+										to go back to the drawing board. Additionally, although the write head was functional,
+										we wanted to improve its consistency to assist the model in symbol recognition. </p>
+
+									<span class="image fit"><img src="images/prototype2.png" alt="Prototype 2"/></span>
+								</div>
+							</section>
+
+						<!-- Three -->
+							<section id="four">
+								<div class="inner">
+									<header class="major">
+										<h1>Sprint 3</h1>
+									</header>
+									<p>In sprint three, we accomplished our Minimum Viable Product. By the end of the sprint,
+										we had a functional bit-string writer and reader. In this sprint, we completed symbol
+										recognition by transitioning to an alphabet consisting of bit strings mapping to symbols
+										rather than separate symbols and by creating a shroud around the camera to decrease glare.
+										We also improved the quality of our write head, installed a revised erase head, and
+										finished writing the library for controlling the machine. Finally, we wrote the functions
+										for Turing machine operations, starting with identifying if a string is a palindrome
+										and if it has an equal number of ones/zeros. In this sprint, we continued to face
+										challenges where the eraser would not fully eliminate symbols. Additionally, multiple
+										of our used electrical components failed, so we worked quickly to order new parts and
+										replace the old ones. This sprint continued until we had to demo our Turing Machine to
+										people. We also added state transition code for more operations, including booleanOr,
+										booleanNot, and addition. We also performed extensive cable management and re-designed
+										a lot of circuitry to fit everything inside of the Turing Machine’s “box,” including
+										soldering together a new circuit board for running a few motors. Once we were done with
+										this, we installed a display panel which consists of switches to control the power
+										supply/execution of the operation of the machine and an LCD to display the current
+										operation and input string. The wooden base plate that integrally holds the Turing
+										Machine was also stained to give it a more aesthetic and classic-old look.
+									</p>
+
+								</div>
+							</section>
+
+
+				<!-- Footer -->
+					<footer id="footer">
+						<div class="inner">
+							<ul class="icons">
+								<li><a href="https://github.com/olincollege/TuringMachine" class="icon brands alt fa-github"><span class="label">GitHub</span></a></li>		</ul>		</ul>
+							<ul class="copyright">
+								<li>&copy; 2023-Present. All rights reserved by the <a href="index.html" class="link">People</a> who developed it. For queries, reach out to one of us, and we'd be happy to connect!</li>
+							</ul>
+						</div>
+					</footer>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>
