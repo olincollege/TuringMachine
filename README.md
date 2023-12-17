@@ -40,9 +40,9 @@ such that (u + v = w))
 
 ### Brief structure of repo
 
-**CAD** directory houses all the design, fabrication, and mechanical aspects of the project.
+The `CAD` directory houses all the design, fabrication, and mechanical aspects of the project.
 
-**code** directory contains the entire codebase for simulating the Turing Machine. The subdirectory **main** contains the code flashed to Arduino UNO for motor functions,
-state transition, and state transition operations. The subdirectory **symbol_recognition** contains the code for classifying the bits written on tape and is flashed to the ESP32-Cam.
+The `code` directory contains the entire codebase for simulating the Turing Machine. The subdirectory `main` contains the code flashed to Arduino UNO for motor functions,
+state transition, and state transition operations. The subdirectory `symbol_recognition` contains the code for classifying the bits written on tape and is flashed to the ESP32-Cam.
 
-**website** directory contains the entire code for our hosted website.
+The `website` directory contains the entire code for our hosted website.
