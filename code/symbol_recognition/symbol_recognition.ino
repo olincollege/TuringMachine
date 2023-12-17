@@ -44,7 +44,7 @@ void setup() {
   //ledcAttachPin(CONFIG_LED_LEDC_PIN, CONFIG_LED_LEDC_CHANNEL);
   
   // Set LED brightness
-  //ledcWrite(CONFIG_LED_LEDC_CHANNEL, 100);
+  //ledcWrite(CONFIG_LED_LEDC_CHANNEL, 150);
   
   Serial.println(setup_camera(FRAME_SIZE) ? "Camera Initialized" : "Camera Initialization Failed");
   delay(2000); // Allow time for the camera to stabilize before attempting capture
@@ -127,8 +127,10 @@ bool capture_still() {
     total_features += features[i];
   }
 
+  //Serial.println(total_features);
+
   // Classify symbols using conditionals
-  if (total_features < 3000) {
+  if (total_features < 4000) {
     Serial.println("1");
   }
   else {

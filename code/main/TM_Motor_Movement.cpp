@@ -76,7 +76,7 @@ void TM_Motor_Movement::begin() {
     eraserControl = AFMS.getMotor(eraser_controlM_pin);
     //Serial.println("Eraser Found!");
     eraserActuation.attach(eraser_actuationM_pin);
-    eraserActuation.write(eraser_actuationM_max);
+    eraserActuation.write(eraser_actuationM_min);
     delay(300);
     //Serial.println("Eraser acuation home!");
     drawingActuation.attach(draw_actuation_servoM_pin);
@@ -258,6 +258,8 @@ void TM_Motor_Movement::eraseAll() {
 
     eraserDown();
     delay(500);
+    eraserOn();
+    delay(500);
     fineFilmControl->setSpeed(stepperM_speed);
     coarseFilmControl->setSpeed(dcM_film_speed);
     coarseFilmControl->run(FORWARD);
@@ -281,6 +283,8 @@ void TM_Motor_Movement::eraseAll() {
     coarseFilmControl->run(FORWARD);
     fineFilmControl->step(erase_all_dist, FORWARD, MICROSTEP);
     coarseFilmControl->setSpeed(0);
+    delay(500);
+    eraserOff();
     delay(500);
     eraserUp();
 }
