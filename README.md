@@ -19,7 +19,7 @@ List of operations currently supported:
 - **palindrome** (check whether a string of 0s and 1s is a palindrome)
 - **booleanNot** (check whether a string is the boolean NOT/complement of another string)
 - **booleanOr** (check whether a string is the boolean OR output of two other strings)
-
+- **addition** (check whether a string is the binary addition output of two other strings)
 
 ### Strings/Language
 
@@ -29,9 +29,14 @@ Sample string input formats or languages accepted by the Turing Machine for oper
 
 **palindrome**: 010, 1001, 111, etc. (any string that consists of 0s and 1s)
 
-**booleanNot**: #0#1, #110#001, #10#01, etc. (two strings u and v that consist of 0s and 1s in the form #u#v)
+**booleanNot**: #0#1, #110#001, #10#01, etc. (two strings u and v that consist of 0s and 1s in the form #u#v 
+such that (NOT u = v))
 
-**booleanOr**: #0#1#1, "#101#010#111", etc. (three strings u, v, and w that consist of 0s and 1s in the form #u#v#w)
+**booleanOr**: #0#1#1, "#101#010#111", etc. (three strings u, v, and w that consist of 0s and 1s in the form #u#v#w 
+such that (u OR v = w))
+
+**addition**: #0#1#1, #01#01#10, #101#010#111, etc. (three strings u, v, and w that consist of 0s and 1s in the form #u#v#w 
+such that (u + v = w))
 
 ### Brief structure of repo
 

@@ -533,20 +533,246 @@ TM_transition_output addition(const TM_transition_input& input) {
             output.move_pointer = 1;
         }
     } else if (input.state == 34) {
-        if (input.symbol == 'X') {
-            output.state = 35;
-            output.symbol = 'X';
-            output.move_pointer = -1;
+        if (input.symbol == '0') {
+            output.state = 34;
+            output.symbol = '0';
+            output.move_pointer = 1;
+        } else if (input.symbol == '1') {
+            output.state = 34;
+            output.symbol = '1';
+            output.move_pointer = 1;
         } else if (input.symbol == '_') {
             output.state = 35;
             output.symbol = '_';
+            output.move_pointer = -1;
+        } else if (input.symbol == 'X') {
+            output.state = 35;
+            output.symbol = 'X';
             output.move_pointer = -1;
         } else {
             output.state = 66;
             output.symbol = input.symbol;
             output.move_pointer = 1;
         }
-    } 
+    } else if (input.state == 35) {
+        if (input.symbol == '0') {
+            output.state = 36;
+            output.symbol = 'X';
+            output.move_pointer = -1;
+        } else {
+            output.state = 66;
+            output.symbol = input.symbol;
+            output.move_pointer = 1;
+        }
+    } else if (input.state == 36) {
+        if (input.symbol == '0') {
+            output.state = 36;
+            output.symbol = '0';
+            output.move_pointer = -1;
+        } else if (input.symbol == '1') {
+            output.state = 36;
+            output.symbol = '1';
+            output.move_pointer = -1;
+        } else if (input.symbol == '#') {
+            output.state = 15;
+            output.symbol = '#';
+            output.move_pointer = -1;
+        } else {
+            output.state = 66;
+            output.symbol = input.symbol;
+            output.move_pointer = 1;
+        }
+    } else if (input.state == 37) {
+        if (input.symbol == 'X') {
+            output.state = 37;
+            output.symbol = 'X';
+            output.move_pointer = 1;
+        } else if (input.symbol == '#') {
+            output.state = 38;
+            output.symbol = '#';
+            output.move_pointer = 1;
+        } else {
+            output.state = 66;
+            output.symbol = input.symbol;
+            output.move_pointer = 1;
+        }
+    } else if (input.state == 38) {
+        if (input.symbol == '0') {
+            output.state = 38;
+            output.symbol = '0';
+            output.move_pointer = 1;
+        } else if (input.symbol == '1') {
+            output.state = 38;
+            output.symbol = '1';
+            output.move_pointer = 1;
+        } else if (input.symbol == 'X') {
+            output.state = 39;
+            output.symbol = 'X';
+            output.move_pointer = -1;
+        } else {
+            output.state = 66;
+            output.symbol = input.symbol;
+            output.move_pointer = 1;
+        }
+    } else if (input.state == 39) {
+        if (input.symbol == '0') {
+            output.state = 40;
+            output.symbol = 'X';
+            output.move_pointer = 1;
+        } else if (input.symbol == '1') {
+            output.state = 47;
+            output.symbol = 'X';
+            output.move_pointer = 1;
+        } else {
+            output.state = 66;
+            output.symbol = input.symbol;
+            output.move_pointer = 1;
+        }
+    } else if (input.state == 40) {
+        if (input.symbol == 'X') {
+            output.state = 40;
+            output.symbol = 'X';
+            output.move_pointer = 1;
+        } else if (input.symbol == '#') {
+            output.state = 41;
+            output.symbol = '#';
+            output.move_pointer = 1;
+        } else {
+            output.state = 66;
+            output.symbol = input.symbol;
+            output.move_pointer = 1;
+        }
+    } else if (input.state == 41) {
+        if (input.symbol == '0') {
+            output.state = 41;
+            output.symbol = '0';
+            output.move_pointer = 1;
+        } else if (input.symbol == '1') {
+            output.state = 41;
+            output.symbol = '1';
+            output.move_pointer = 1;
+        } else if (input.symbol == 'X') {
+            output.state = 42;
+            output.symbol = 'X';
+            output.move_pointer = -1;
+        } else {
+            output.state = 66;
+            output.symbol = input.symbol;
+            output.move_pointer = 1;
+        }
+    } else if (input.state == 42) {
+        if (input.symbol == '0') {
+            output.state = 43;
+            output.symbol = 'X';
+            output.move_pointer = -1;
+        } else {
+            output.state = 66;
+            output.symbol = input.symbol;
+            output.move_pointer = 1;
+        }
+    } else if (input.state == 43) {
+        if (input.symbol == '0') {
+            output.state = 43;
+            output.symbol = '0';
+            output.move_pointer = -1;
+        } else if (input.symbol == '1') {
+            output.state = 43;
+            output.symbol = '1';
+            output.move_pointer = -1;
+        } else if (input.symbol == '#') {
+            output.state = 23;
+            output.symbol = '#';
+            output.move_pointer = -1;
+        } else {
+            output.state = 66;
+            output.symbol = input.symbol;
+            output.move_pointer = 1;
+        }
+    } else if (input.state == 44) {
+        if (input.symbol == 'X') {
+            output.state = 44;
+            output.symbol = 'X';
+            output.move_pointer = 1;
+        } else if (input.symbol == '#') {
+            output.state = 45;
+            output.symbol = '#';
+            output.move_pointer = 1;
+        } else {
+            output.state = 66;
+            output.symbol = input.symbol;
+            output.move_pointer = 1;
+        }
+    } else if (input.state == 45) {
+        if (input.symbol == '0') {
+            output.state = 45;
+            output.symbol = '0';
+            output.move_pointer = 1;
+        } else if (input.symbol == '1') {
+            output.state = 45;
+            output.symbol = '1';
+            output.move_pointer = 1;
+        } else if (input.symbol == 'X') {
+            output.state = 46;
+            output.symbol = 'X';
+            output.move_pointer = -1;
+        } else {
+            output.state = 66;
+            output.symbol = input.symbol;
+            output.move_pointer = 1;
+        }
+    } else if (input.state == 46) {
+        if (input.symbol == '0') {
+            output.state = 43;
+            output.symbol = 'X';
+            output.move_pointer = -1;
+        } else {
+            output.state = 66;
+            output.symbol = input.symbol;
+            output.move_pointer = 1;
+        }
+    } else if (input.state == 47) {
+        if (input.symbol == 'X') {
+            output.state = 47;
+            output.symbol = 'X';
+            output.move_pointer = 1;
+        } else if (input.symbol == '#') {
+            output.state = 48;
+            output.symbol = '#';
+            output.move_pointer = 1;
+        } else {
+            output.state = 66;
+            output.symbol = input.symbol;
+            output.move_pointer = 1;
+        }
+    } else if (input.state == 48) {
+        if (input.symbol == '0') {
+            output.state = 48;
+            output.symbol = '0';
+            output.move_pointer = 1;
+        } else if (input.symbol == '1') {
+            output.state = 48;
+            output.symbol = '1';
+            output.move_pointer = 1;
+        } else if (input.symbol == 'X') {
+            output.state = 49;
+            output.symbol = 'X';
+            output.move_pointer = -1;
+        } else {
+            output.state = 66;
+            output.symbol = input.symbol;
+            output.move_pointer = 1;
+        }
+    } else if (input.state == 49) {
+        if (input.symbol == '1') {
+            output.state = 43;
+            output.symbol = 'X';
+            output.move_pointer = -1;
+        } else {
+            output.state = 66;
+            output.symbol = input.symbol;
+            output.move_pointer = 1;
+        }
+    }
     else {
         output.state = 66;
         output.symbol = input.symbol;
