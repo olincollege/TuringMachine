@@ -4,6 +4,7 @@
 
 Developed at Olin College of Engineering for the Principles of Integrated Engineering (Fall 2023) final project.
 
+[STORY: Olin Students Create Rare, Fully Functional Electromechanical Turing Machine](https://www.olin.edu/articles/story-olin-students-create-rare-fully-functional-electromechanical-turing-machine)
 
 ### About
 This project is a physical electromechanical implementation of a [Universal Turing Machine](https://en.wikipedia.org/wiki/Universal_Turing_machine) that currently supports basic Turing-computational operations and a few Turing-complete languages.
